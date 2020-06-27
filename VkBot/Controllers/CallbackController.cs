@@ -54,12 +54,12 @@ namespace VkBot.Controllers
                         var msg = Message.FromJson(new VkResponse(updates.Object));
                         string test = msg.Text;
                         s.searchSPB(test);
-                        //s.searchOth(test);
+                        s.searchOth(test);
                         string send = s.printResult();
                         //ответ
                         _vkApi.Messages.Send(new MessagesSendParams
                         {
-                            RandomId = new DateTime().Second,
+                            //RandomId = new DateTime().Second,
                             PeerId = msg.PeerId.Value,
                             Message = send
                         });
