@@ -66,21 +66,9 @@ namespace VkBot.Controllers
                                 PeerId = msg.PeerId.Value,
                                 Message = send
                             });
-                        var photos = _vkApi.Photo.Get(new PhotoGetParams
-                        {
-                            AlbumId = PhotoAlbumType.Id(273064435),
-                            OwnerId = _vkApi.UserId.Value
-                        });
-                        _vkApi.Messages.Send(new MessagesSendParams
-                        {
-                            RandomId = new DateTime().Millisecond,
-                            Attachments = photos,
-                            Message = "Message",
-                            PeerId = _vkApi.UserId.Value
-                        });
 
                         System.Threading.Thread.Sleep(3000);
-                        if (msg.Unread > 0)
+                        if (msg.Attachments.Count > 0)
                         {
                             
 
@@ -104,7 +92,6 @@ namespace VkBot.Controllers
                                 PeerId = _vkApi.UserId.Value
                             });
                             break;*/
-
 
                         }
                         break;
