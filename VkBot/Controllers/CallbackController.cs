@@ -48,7 +48,7 @@ namespace VkBot.Controllers
                         Search s = new Search();
                         // Десериализация
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-
+                            
                             string test = msg.Text.ToUpper();
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
@@ -67,7 +67,7 @@ namespace VkBot.Controllers
                                 Message = send
                             });
 
-                        System.Threading.Thread.Sleep(3000);
+                        /*System.Threading.Thread.Sleep(3000);
                         if (msg.Attachments.Count > 0)
                         {
                             
@@ -79,7 +79,7 @@ namespace VkBot.Controllers
                                 Message = "Отстань"
                             });
                             break;
-                            /*var photos = _vkApi.Photo.Get(new PhotoGetParams
+                            var photos = _vkApi.Photo.Get(new PhotoGetParams
                             {
                                 AlbumId = PhotoAlbumType.Id(273064435),
                                 OwnerId = _vkApi.UserId.Value
@@ -93,8 +93,8 @@ namespace VkBot.Controllers
                             });
                             break;*/
 
-                        }
-                        break;
+                    }
+                    break;
                     }
             }
 
