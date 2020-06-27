@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using CsQuery;
+using CsQuery.ExtensionMethods.Internal;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace VkBot
@@ -22,9 +23,23 @@ namespace VkBot
             a[3] = new Tuple<string, string>("GBP", "Фунт");
             a[4] = new Tuple<string, string>("USD", "Доллар");
             }
+        public string s1;
+        public string s2;
+        public string getName(string val)
+        {
+            s1 = val;
+            for (int t = 0; t < 5; t++)
+            {
+                if (s1 == a[t].Item1)
+                {
+                    s2 = a[t].Item2;
+                    return s2;
+                }
 
-
-        public string printResult()
+            }
+            return s2;
+        }
+            public string printResult()
             {
                 string res = "";
                 if (answ.Count > 4)
@@ -50,19 +65,8 @@ namespace VkBot
             urls[3] = "https://ru.myfin.by/bank/alfabank/currency/sankt-peterburg";
             urls[4] = "https://ru.myfin.by/bank/mkb/currency/sankt-peterburg";
             urls[5] = "https://ru.myfin.by/bank/bspb/currency/sankt-peterburg";
-            string s1 = val;
-            string s2 = "";
-            bool flag = false;
-            for (int t = 0; t < 5; t++)
-            {
-                if (s1 == a[t].Item1)
-                {
-                    s2 = a[t].Item2;
-                    flag = true;
-                }
 
-            }
-            if (flag)
+            if (!getName(val).IsNullOrEmpty())
             {
                 CQ dom0 = CQ.CreateFromUrl("https://ru.myfin.by/bank/sberbank/currency/sankt-peterburg");
                 int tr = 0;
