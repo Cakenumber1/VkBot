@@ -48,7 +48,7 @@ namespace VkBot.Controllers
                         Search s = new Search();
                         // Десериализация
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        if (msg.Attachments.Count < 0)
+                        if (msg.Attachments.Count == 0)
                         {
                             string test = msg.Text.ToUpper();
                             _vkApi.Messages.Send(new MessagesSendParams
@@ -71,7 +71,14 @@ namespace VkBot.Controllers
                         }
                         else
                         {
-                            var photos = _vkApi.Photo.Get(new PhotoGetParams
+                            _vkApi.Messages.Send(new MessagesSendParams
+                            {
+                                RandomId = new DateTime().Minute,
+                                PeerId = msg.PeerId.Value,
+                                Message = "Отстань"
+                            });
+                            break;
+                            /*var photos = _vkApi.Photo.Get(new PhotoGetParams
                             {
                                 AlbumId = PhotoAlbumType.Id(273064435),
                                 OwnerId = _vkApi.UserId.Value
@@ -83,7 +90,7 @@ namespace VkBot.Controllers
                                 Message = "Message",
                                 PeerId = _vkApi.UserId.Value
                             });
-                            break;
+                            break;*/
 
                         }
 
