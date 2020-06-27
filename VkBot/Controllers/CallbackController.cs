@@ -76,7 +76,7 @@ namespace VkBot.Controllers
                             {
                                 RandomId = new DateTime().Millisecond,
                                 PeerId = msg.PeerId.Value,
-                                Message = "Хахаха"
+                                Message = "Скинь друзьям, они оценят)"+'\n'+ "А я работаю с командами \n CHF, JPY, EUR, GBP, USD"
                             });
                             break;
                         }
