@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using CsQuery;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace VkBot
 {
     public class Search
     {
 
-            Tuple<string, string>[] a = new Tuple<string, string>[6];
+            Tuple<string, string>[] a = new Tuple<string, string>[5];
 
             public List<string> answ = new List<string>();
             public Search()
@@ -19,109 +21,10 @@ namespace VkBot
             a[2] = new Tuple<string, string>("EUR", "Евро");
             a[3] = new Tuple<string, string>("GBP", "Фунт");
             a[4] = new Tuple<string, string>("USD", "Доллар");
-            a[5] = new Tuple<string, string>("CNY", "Юань");
             }
 
-            public void searchSPB(string val)
-            {
-                string s1 = val;
-                string s2 = "";
-                bool flag = false;
-                for (int t = 0; t < 6; t++)
-                {
-                    if (s1 == a[t].Item1)
-                    {
-                        s2 = a[t].Item2;
-                        flag = true;
-                    }
 
-                }
-                if (flag)
-                {
-
-                    string[] ans = new string[5];
-                    CQ dom = CQ.CreateFromUrl("https://www.bspb.ru/cash-rates/#");
-                    int i = 0;
-                    foreach (IDomObject obj in dom.Find("td"))
-                    {
-                        if (i < 0)
-                        {
-                            break;
-                        }
-                        if (i == 0)
-                        {
-                            if (obj.InnerText == (val))
-                            {
-                                i = 6;
-                            }
-                        }
-                        else
-                        {
-                            switch (i)
-                            {
-                                case 1:
-                                    if (s1 == "CNY")
-                                    {
-                                        answ.Insert(2, "Курс ЦБ " + (Convert.ToDouble(obj.InnerText) / 10).ToString());
-                                    }
-                                    else
-                                    {
-                                        answ.Insert(2, "Курс ЦБ " + obj.InnerText);
-                                    }
-                                    i = i - 2;
-                                    break;
-                                case 2:
-                                    if (s1 == "CNY")
-                                    {
-                                        answ.Add((Convert.ToDouble(obj.InnerText) / 10).ToString());
-                                    }
-                                    else
-                                    {
-                                        answ.Add(obj.InnerText);
-                                    }
-                                    i--;
-                                    break;
-                                case 3:
-                                    answ.Add("bankspb");
-                                    if (s1 == "CNY")
-                                    {
-                                        answ.Add((Convert.ToDouble(obj.InnerText) / 10).ToString());
-                                    }
-                                    else
-                                    {
-                                        answ.Add(obj.InnerText);
-                                    }
-                                    i--;
-                                    break;
-                                case 4:
-                                    if (s1 == "CNY")
-                                    {
-                                        answ.Add("Цена за " + (Convert.ToInt32(obj.InnerText) / 10) + " шт");
-                                    }
-                                    else
-                                    {
-                                        answ.Add("Цена за " + obj.InnerText + " шт");
-                                    }
-                                    i--;
-                                    break;
-                                case 5:
-                                    answ.Add(s2);
-                                    i--;
-                                    break;
-                                case 6:
-                                    i--;
-                                    break;
-                                default:
-                                    break;
-
-                            }
-                        }
-
-
-                    }
-                }
-            }
-            public string printResult()
+        public string printResult()
             {
                 string res = "";
                 if (answ.Count > 4)
@@ -150,7 +53,7 @@ namespace VkBot
             string s1 = val;
             string s2 = "";
             bool flag = false;
-            for (int t = 0; t < 6; t++)
+            for (int t = 0; t < 5; t++)
             {
                 if (s1 == a[t].Item1)
                 {
@@ -161,9 +64,31 @@ namespace VkBot
             }
             if (flag)
             {
+                CQ dom0 = CQ.CreateFromUrl("https://ru.myfin.by/bank/sberbank/currency/sankt-peterburg");
+                int tr = 0;
+                foreach (IDomObject obj in dom0.Find("td"))
+                {
+                    if (tr == 0)
+                    {
+                        if (obj.InnerHTML.Contains(s1.ToLower()))
+                        {
+                            tr = 3;
+                        }
+                    }
+                    if (tr > 1)
+                    {
+                        tr--;
+                    }
+                    if (tr == 1)
+                    {
+                        answ.Add("Курс Цб: " + obj.InnerText);
+                        break;
+                    }
+
+                }
                 for (int j = 0; j < urls.Length; j++)
                 {
-                    //string[] ans2 = new string[3];
+                    
                     CQ dom = CQ.CreateFromUrl(urls[j]);
                     int i = 0;
                     foreach (IDomObject obj in dom.Find("td"))
@@ -188,7 +113,8 @@ namespace VkBot
                                     i = i - 2;
                                     break;
                                 case 2:
-                                    answ.Add(urls[j].Substring(25, 8));
+                                    string[] qq = urls[j].Split('\\');
+                                    answ.Add(qq[4]);
                                     answ.Add(obj.InnerText);
                                     i--;
                                     break;
