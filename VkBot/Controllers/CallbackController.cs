@@ -8,6 +8,7 @@ using VkNet.Abstractions;
 using System;
 using VkNet.Model.Attachments;
 using VkNet.Enums.SafetyEnums;
+using CsQuery.ExtensionMethods.Internal;
 
 namespace VkBot.Controllers
 {
@@ -48,7 +49,8 @@ namespace VkBot.Controllers
                         Search s = new Search();
                         // Десериализация
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                            
+                        if (!msg.Text.IsNullOrEmpty())
+                        {
                             string test = msg.Text.ToUpper();
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
@@ -66,6 +68,18 @@ namespace VkBot.Controllers
                                 PeerId = msg.PeerId.Value,
                                 Message = send
                             });
+                            break;
+                        }
+                        else
+                        {
+                            _vkApi.Messages.Send(new MessagesSendParams
+                            {
+                                RandomId = new DateTime().Millisecond,
+                                PeerId = msg.PeerId.Value,
+                                Message = "Хахаха"
+                            });
+                            break;
+                        }
 
                         /*System.Threading.Thread.Sleep(3000);
                         if (msg.Attachments.Count > 0)
@@ -94,7 +108,7 @@ namespace VkBot.Controllers
                             break;*/
 
                     
-                    break;
+
                     }
             }
 
