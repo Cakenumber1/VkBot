@@ -81,7 +81,7 @@ namespace VkBot
                     }
                     if (tr == 1)
                     {
-                        answ.Add("Курс Цб:\n" + obj.InnerText);
+                        answ.Add("Курс Цб\n" + obj.InnerText);
                         break;
                     }
 
