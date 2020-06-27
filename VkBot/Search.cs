@@ -137,25 +137,30 @@ namespace VkBot
                     return "Введи нормальное что-то \nВот список: CHF, JPY, EUR, GBP, USD, CNY";
                 }
             }
-            public void searchOth(string val)
+        public void searchOth(string val)
+        {
+
+            string[] urls = new string[6];
+            urls[0] = "https://ru.myfin.by/bank/sberbank/currency/sankt-peterburg";
+            urls[1] = "https://ru.myfin.by/bank/vtb/currency/sankt-peterburg";
+            urls[2] = "https://ru.myfin.by/bank/gazprombank/currency/sankt-peterburg";
+            urls[3] = "https://ru.myfin.by/bank/alfabank/currency/sankt-peterburg";
+            urls[4] = "https://ru.myfin.by/bank/mkb/currency/sankt-peterburg";
+            urls[5] = "https://ru.myfin.by/bank/bspb/currency/sankt-peterburg";
+            string s1 = val;
+            string s2 = "";
+            bool flag = false;
+            for (int t = 0; t < 6; t++)
             {
-
-                string[] urls = new string[5];
-                urls[0] = "https://ru.myfin.by/bank/sberbank/currency/sankt-peterburg";
-                urls[1] = "https://ru.myfin.by/bank/vtb/currency/sankt-peterburg";
-                urls[2] = "https://ru.myfin.by/bank/gazprombank/currency/sankt-peterburg";
-                urls[3] = "https://ru.myfin.by/bank/alfabank/currency/sankt-peterburg";
-                urls[4] = "https://ru.myfin.by/bank/mkb/currency/sankt-peterburg";
-                string s1 = val;
-                string s2 = "";
-                for (int t = 0; t < 6; t++)
+                if (s1 == a[t].Item1)
                 {
-                    if (s1 == a[t].Item1)
-                    {
-                        s2 = a[t].Item2;
-                    }
-
+                    s2 = a[t].Item2;
+                    flag = true;
                 }
+
+            }
+            if (flag)
+            {
                 for (int j = 0; j < urls.Length; j++)
                 {
                     //string[] ans2 = new string[3];
@@ -183,7 +188,7 @@ namespace VkBot
                                     i = i - 2;
                                     break;
                                 case 2:
-                                    answ.Add(urls[j].Substring( 25, 8));
+                                    answ.Add(urls[j].Substring(25, 8));
                                     answ.Add(obj.InnerText);
                                     i--;
                                     break;
@@ -198,6 +203,7 @@ namespace VkBot
 
                 }
             }
+        }
         
         
     }
