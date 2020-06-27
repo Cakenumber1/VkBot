@@ -6,6 +6,8 @@ using VkNet.Utils;
 using VkNet.Model.RequestParams;
 using VkNet.Abstractions;
 using System;
+using VkNet.Model.Attachments;
+using VkNet.Enums.SafetyEnums;
 
 namespace VkBot.Controllers
 {
@@ -46,24 +48,45 @@ namespace VkBot.Controllers
                         Search s = new Search();
                         // Десериализация
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        string test = msg.Text.ToUpper();
-                        _vkApi.Messages.Send(new MessagesSendParams
+                        if (msg.Attachments.Count < 0)
                         {
-                            RandomId = new DateTime().Minute,
-                            PeerId = msg.PeerId.Value,
-                            Message = msg.Text +'\n'+s.getName(test)
-                        });
+                            string test = msg.Text.ToUpper();
+                            _vkApi.Messages.Send(new MessagesSendParams
+                            {
+                                RandomId = new DateTime().Minute,
+                                PeerId = msg.PeerId.Value,
+                                Message = msg.Text + '\n' + s.getName(test)
+                            });
 
-                        s.searchOth(test);
-                        string send = s.printResult();
-                        //ответ
-                        _vkApi.Messages.Send(new MessagesSendParams
+                            s.searchOth(test);
+                            string send = s.printResult();
+                            //ответ
+                            _vkApi.Messages.Send(new MessagesSendParams
+                            {
+                                RandomId = new DateTime().Millisecond,
+                                PeerId = msg.PeerId.Value,
+                                Message = send
+                            });
+                            break;
+                        }
+                        else
                         {
-                            RandomId = new DateTime().Millisecond,
-                            PeerId = msg.PeerId.Value,
-                            Message = send
-                        });
-                        break;
+                            var photos = _vkApi.Photo.Get(new PhotoGetParams
+                            {
+                                AlbumId = PhotoAlbumType.Id(273064435),
+                                OwnerId = _vkApi.UserId.Value
+                            });
+                            _vkApi.Messages.Send(new MessagesSendParams
+                            {
+                                RandomId = new DateTime().Millisecond,
+                                Attachments = photos,
+                                Message = "Message",
+                                PeerId = _vkApi.UserId.Value
+                            });
+                            break;
+
+                        }
+
                     }
             }
 
