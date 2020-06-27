@@ -37,7 +37,7 @@ namespace VkBot
                 }
                 else
                 {
-                    return "Введи нормальное что-то \nВот список: CHF, JPY, EUR, GBP, USD, CNY";
+                    return "Введи нормальное что-то \nВот список: CHF, JPY, EUR, GBP, USD";
                 }
             }
         public void searchOth(string val)
@@ -81,7 +81,7 @@ namespace VkBot
                     }
                     if (tr == 1)
                     {
-                        answ.Add("Курс Цб: " + obj.InnerText);
+                        answ.Add("Курс Цб:\n" + obj.InnerText);
                         break;
                     }
 
@@ -113,8 +113,8 @@ namespace VkBot
                                     i = i - 2;
                                     break;
                                 case 2:
-                                    string[] qq = urls[j].Split('\\');
-                                    answ.Add(qq[4]);
+                                    string[] qq = urls[j].Split('/');
+                                    answ.Add(qq[4].ToUpper());
                                     answ.Add(obj.InnerText);
                                     i--;
                                     break;
