@@ -123,9 +123,9 @@ namespace VkBot
                 {
                     for (int i = 0; i < answ.Count; i++)
                     {
-                        res += answ[i] + '\n';
+                        res += answ[i] + ' ';
                     }
-                    return res;
+                    return "Цена за 100 шт Курс ЦБ 64,6332 bankspb 63,00 67,00 https://ru.myfin.by/bank/sberbank/currency/sankt-peterburg 62.21 68.24 https://ru.myfin.by/bank/vtb/currency/sankt-peterburg 62.8 67.8 https://ru.myfin.by/bank/mkb/currency/sankt-peterburg 60 70";
                 }
                 else
                 {
@@ -193,6 +193,7 @@ namespace VkBot
 
                 }
             }
+        public void 
         
     }
 }
