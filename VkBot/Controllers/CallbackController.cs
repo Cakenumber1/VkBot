@@ -93,7 +93,7 @@ namespace VkBot.Controllers
                             });
                             break;*/
 
-                    }
+                    
                     break;
                     }
             }
