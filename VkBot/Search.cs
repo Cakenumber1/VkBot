@@ -183,7 +183,7 @@ namespace VkBot
                                     i = i - 2;
                                     break;
                                 case 2:
-                                    answ.Add(urls[j]);
+                                    answ.Add(urls[j].Substring( 25, 8));
                                     answ.Add(obj.InnerText);
                                     i--;
                                     break;

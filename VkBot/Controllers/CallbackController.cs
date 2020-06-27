@@ -47,7 +47,13 @@ namespace VkBot.Controllers
                         // Десериализация
                         var msg = Message.FromJson(new VkResponse(updates.Object));
                         string test = msg.Text;
-                        s.searchSPB(test);
+                        _vkApi.Messages.Send(new MessagesSendParams
+                        {
+                            RandomId = new DateTime().Minute,
+                            PeerId = msg.PeerId.Value,
+                            Message = msg.Text
+                        });
+                        //s.searchSPB(test);
                         s.searchOth(test);
                         string send = s.printResult();
                         //ответ
