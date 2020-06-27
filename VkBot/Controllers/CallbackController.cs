@@ -42,14 +42,8 @@ namespace VkBot.Controllers
                 // Новое сообщение
                 case "message_new":
                     {
-                        Tuple<string, string>[] a = new Tuple<string, string>[6];
-                        a[0] = new Tuple<string, string>("CHF", "Франк");
-                        a[1] = new Tuple<string, string>("JPY", "Йена");
-                        a[2] = new Tuple<string, string>("EUR", "Евро");
-                        a[3] = new Tuple<string, string>("GBP", "Фунт");
-                        a[4] = new Tuple<string, string>("USD", "Доллар");
-                        a[5] = new Tuple<string, string>("CNY", "Юань");
-                        Search s = new Search(a);
+
+                        Search s = new Search();
                         // Десериализация
                         var msg = Message.FromJson(new VkResponse(updates.Object));
                         string test = msg.Text;

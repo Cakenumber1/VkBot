@@ -9,12 +9,17 @@ namespace VkBot
     public class Search
     {
 
-            //string[] names;
+            Tuple<string, string>[] a = new Tuple<string, string>[6];
+
             public List<string> answ = new List<string>();
-            Tuple<string, string>[] vals;
-            public Search(Tuple<string, string>[] a)
+            public Search()
             {
-                vals = a;
+            a[0] = new Tuple<string, string>("CHF", "Франк");
+            a[1] = new Tuple<string, string>("JPY", "Йена");
+            a[2] = new Tuple<string, string>("EUR", "Евро");
+            a[3] = new Tuple<string, string>("GBP", "Фунт");
+            a[4] = new Tuple<string, string>("USD", "Доллар");
+            a[5] = new Tuple<string, string>("CNY", "Юань");
             }
 
             public void searchSPB(string val)
@@ -24,9 +29,9 @@ namespace VkBot
                 bool flag = false;
                 for (int t = 0; t < 6; t++)
                 {
-                    if (s1 == vals[t].Item1)
+                    if (s1 == a[t].Item1)
                     {
-                        s2 = vals[t].Item2;
+                        s2 = a[t].Item2;
                         flag = true;
                     }
 
@@ -123,9 +128,9 @@ namespace VkBot
                 {
                     for (int i = 0; i < answ.Count; i++)
                     {
-                        res += answ[i] + ' ';
+                        res += answ[i] + '\n';
                     }
-                    return "Цена за 100 шт Курс ЦБ 64,6332 bankspb 63,00 67,00 https://ru.myfin.by/bank/sberbank/currency/sankt-peterburg 62.21 68.24 https://ru.myfin.by/bank/vtb/currency/sankt-peterburg 62.8 67.8 https://ru.myfin.by/bank/mkb/currency/sankt-peterburg 60 70";
+                return res;
                 }
                 else
                 {
@@ -145,9 +150,9 @@ namespace VkBot
                 string s2 = "";
                 for (int t = 0; t < 6; t++)
                 {
-                    if (s1 == vals[t].Item1)
+                    if (s1 == a[t].Item1)
                     {
-                        s2 = vals[t].Item2;
+                        s2 = a[t].Item2;
                     }
 
                 }
@@ -178,7 +183,7 @@ namespace VkBot
                                     i = i - 2;
                                     break;
                                 case 2:
-                                    answ.Add("название");
+                                    answ.Add(urls[j]);
                                     answ.Add(obj.InnerText);
                                     i--;
                                     break;
