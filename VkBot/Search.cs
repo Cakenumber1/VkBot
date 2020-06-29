@@ -13,7 +13,7 @@ namespace VkBot
     {
 
         
-        Tuple<string, string>[] val = new Tuple<string, string>[5];
+        Tuple<string, string, string>[] val = new Tuple<string, string, string>[5];
         Tuple<string, string>[] regs = new Tuple<string, string>[30];
         public List<string> answ = new List<string>();
         public string[] sorters = new string[4];
@@ -25,11 +25,11 @@ namespace VkBot
             sorters[2] = "доступн";
             sorters[3] = "дорог";
 
-            val[0] = new Tuple<string, string>("CNY", "Юань");
-            val[1] = new Tuple<string, string>("JPY", "Иена");
-            val[2] = new Tuple<string, string>("EUR", "Евро");
-            val[3] = new Tuple<string, string>("GBP", "Фунт");
-            val[4] = new Tuple<string, string>("USD", "Доллар");
+            val[0] = new Tuple<string, string, string>("CNY", "Юань", "19");
+            val[1] = new Tuple<string, string, string>("JPY", "Иена","36" );
+            val[2] = new Tuple<string, string, string>("EUR", "Евро","4" );
+            val[3] = new Tuple<string, string, string>("GBP", "Фунт", "8");
+            val[4] = new Tuple<string, string, string>("USD", "Доллар", "1");
 
             regs[0] = new Tuple<string, string>("Россия", "");
             regs[1] = new Tuple<string, string>("Москва", "moskva");
@@ -63,7 +63,7 @@ namespace VkBot
             regs[29] = new Tuple<string, string>("Нижний Новгород", "nizhniy-novgorod");
 
         }
-        public int Sorttype=-1;
+        public string sortn = "";
         public string v1;
         public string v2;
         public string r;
@@ -130,10 +130,12 @@ namespace VkBot
                     if (val[t].Item1 == "JPY")
                     {
                         answ.Add(val[t].Item1 + " " + val[t].Item2 + " (100 ед)");
+                        sortn = val[t].Item3;
                     }
                     else
                     {
                         answ.Add(val[t].Item1 + " " + val[t].Item2);
+                        sortn = val[t].Item3;
                     }
                     return v2;
                 }
@@ -146,10 +148,12 @@ namespace VkBot
                     if (val[t].Item1 == "JPY")
                     {
                         answ.Add(val[t].Item1 + " " + val[t].Item2 + " (100 ед)");
+                        sortn = val[t].Item3;
                     }
                     else
                     {
                         answ.Add(val[t].Item1 + " " + val[t].Item2);
+                        sortn = val[t].Item3;
                     }
                     return v2;
                 }
