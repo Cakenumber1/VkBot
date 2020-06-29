@@ -55,6 +55,13 @@ namespace VkBot.Controllers
                             if (msg.Text.StartsWith("@botnumbernotone"))
                             {
                                 test = msg.Text.Substring(17, msg.Text.Length - 17);
+                                _vkApi.Messages.Send(new MessagesSendParams
+                                {
+                                    RandomId = new DateTime().Minute,
+                                    PeerId = msg.PeerId.Value,
+                                    Message = test
+                                });
+                                break;
                             }
                             else
                             {
