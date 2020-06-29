@@ -54,7 +54,7 @@ namespace VkBot.Controllers
                             string test;
                             if (msg.Text.Contains("@botnumbernotone"))
                             {
-                                test = msg.Text.Substring(17, msg.Text.Length - 17);
+                                test = msg.Text.Substring(33, msg.Text.Length - 33);
                             }
                             else
                             {
