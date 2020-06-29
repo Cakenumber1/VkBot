@@ -243,7 +243,7 @@ namespace VkBot
                         curUrl += "?sort=-sell_course_"+sortn;
                     }
                     CQ dom0 = CQ.CreateFromUrl(curUrl);
-                    //answ.Add(curUrl);
+                    answ.Add(curUrl);
                     int tr = 0;
                     foreach (IDomObject obj in dom0.Find("td"))
                     {
