@@ -223,11 +223,11 @@ namespace VkBot
                     string curUrl = urlMain + "/" + curVal + "/" + curReg;
                     if (getSorttype() == 0 || getSorttype() == 1)
                     {
-                        curUrl += "?sort=-buy_course_1";
+                        curUrl += "?sort=buy_course_1";
                     }
                     if (getSorttype() == 2 || getSorttype() == 3)
                     {
-                        curUrl += "?sort=sell_course_1";
+                        curUrl += "?sort=-sell_course_1";
                     }
                     CQ dom0 = CQ.CreateFromUrl(curUrl);
                     answ.Add(curUrl);
