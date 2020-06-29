@@ -221,16 +221,17 @@ namespace VkBot
                     string urlMain = "https://ru.myfin.by/currency";
                     string curReg = getReg();
                     string curUrl = urlMain + "/" + curVal + "/" + curReg;
-                    if (getSorttype() == 0 || getSorttype() == 1)
+                    int z = getSorttype();
+                    if (z == 0 || z == 1 || z ==2 )
                     {
                         curUrl += "?sort=buy_course_4";
                     }
-                    if (getSorttype() == 2 || getSorttype() == 3)
+                    if (z == 3)
                     {
                         curUrl += "?sort=-sell_course_4";
                     }
                     CQ dom0 = CQ.CreateFromUrl(curUrl);
-                    //answ.Add(curUrl);
+                    answ.Add(curUrl);
                     int tr = 0;
                     foreach (IDomObject obj in dom0.Find("td"))
                     {
