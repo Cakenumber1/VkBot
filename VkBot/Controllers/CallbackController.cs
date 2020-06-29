@@ -51,7 +51,16 @@ namespace VkBot.Controllers
                         var msg = Message.FromJson(new VkResponse(updates.Object));
                         if (!msg.Text.IsNullOrEmpty())
                         {
-                            string test = msg.Text;
+                            string test;
+                            if (msg.Text.StartsWith("@botnumbernotone"))
+                            {
+                                test = msg.Text.Substring(17, msg.Text.Length - 17);
+                            }
+                            else
+                            {
+                                test = msg.Text;
+                            }
+
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
                                 RandomId = new DateTime().Minute,
