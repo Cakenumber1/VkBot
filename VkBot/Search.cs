@@ -12,12 +12,19 @@ namespace VkBot
     public class Search
     {
 
+        
         Tuple<string, string>[] val = new Tuple<string, string>[5];
         Tuple<string, string>[] regs = new Tuple<string, string>[30];
         public List<string> answ = new List<string>();
+        public string[] sorters = new string[4];
 
         public Search()
         {
+            sorters[0] = "недорог";
+            sorters[1] = "дешев";
+            sorters[2] = "доступн";
+            sorters[3] = "дорог";
+
             val[0] = new Tuple<string, string>("CNY", "Юань");
             val[1] = new Tuple<string, string>("JPY", "Иена");
             val[2] = new Tuple<string, string>("EUR", "Евро");
@@ -56,6 +63,7 @@ namespace VkBot
             regs[29] = new Tuple<string, string>("Нижний Новгород", "nizhniy-novgorod");
 
         }
+        public int Sorttype=-1;
         public string v1;
         public string v2;
         public string r;
@@ -167,7 +175,21 @@ namespace VkBot
                 answ.Add("г. " + regs[29].Item1);
                 return r;
             }
+            answ.Add("Информация по Рф");
             return r;
+        }
+        public int getSorttype()
+        {
+            for (int t = 0; t < 4; t++)
+            {
+                if (v1.ToLower().Contains(sorters[t]))
+                {
+
+                    return t;
+                }
+
+            }
+            return -1;
         }
         public string printResult()
         {
@@ -195,9 +217,18 @@ namespace VkBot
                 string curVal = getVal(mess);
                 if (!curVal.IsNullOrEmpty())
                 {
+                    
                     string urlMain = "https://ru.myfin.by/currency";
                     string curReg = getReg();
                     string curUrl = urlMain + "/" + curVal + "/" + curReg;
+                    if (getSorttype() == 0 || getSorttype() == 1)
+                    {
+                        curUrl += "?sort=-buy_course_1";
+                    }
+                    if (getSorttype() == 2 || getSorttype() == 3)
+                    {
+                        curUrl += "?sort=sell_course_1";
+                    }
                     CQ dom0 = CQ.CreateFromUrl(curUrl);
                     int tr = 0;
                     foreach (IDomObject obj in dom0.Find("td"))
@@ -244,7 +275,6 @@ namespace VkBot
                     {
                         v2 = val[t].Item1;
                         answ.Add("Курс " + val[t].Item2 + " (" + val[t].Item1 + ") на " + inf[1] + " от Цб:");
-
                     }
                 }
                 string curUrl = urlMain + inf[1];
