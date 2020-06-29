@@ -228,11 +228,11 @@ namespace VkBot
                     int z = getSorttype();
                     if (z == 0 || z == 1 || z ==2 )
                     {
-                        curUrl += "?sort=buy_course_4";
+                        curUrl += "?sort=buy_course_"+sortn;
                     }
                     if (z == 3)
                     {
-                        curUrl += "?sort=-sell_course_4";
+                        curUrl += "?sort=-sell_course_"+sortn;
                     }
                     CQ dom0 = CQ.CreateFromUrl(curUrl);
                     //answ.Add(curUrl);
