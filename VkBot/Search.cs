@@ -343,6 +343,7 @@ namespace VkBot
                     if (tr == 1)
                     {
                         answ.Add(obj.Cq().Text() + " руб. за " + amount + " ед.");
+                        answ.Add(inf[1].Substring(6, inf[1].Length - 6));
                         if(realDate != inf[1].Substring(6, inf[1].Length - 6))
                         {
                             answ.Add("Проверьте корректость введенных данных " + inf[1]);
