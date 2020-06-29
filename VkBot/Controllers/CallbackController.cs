@@ -56,7 +56,7 @@ namespace VkBot.Controllers
                             {
                                 RandomId = new DateTime().Minute,
                                 PeerId = msg.PeerId.Value,
-                                Message = msg.Text + '\n' + s.getName(test)
+                                Message = msg.Text
                             });
 
                             s.searchOth(test);
@@ -76,37 +76,10 @@ namespace VkBot.Controllers
                             {
                                 RandomId = new DateTime().Millisecond,
                                 PeerId = msg.PeerId.Value,
-                                Message = "Скинь друзьям, они оценят)"+'\n'+ "А я работаю с командами \n CHF, JPY, EUR, GBP, USD"
-                            });
+                                Message = "Чтобы получить справку по командам напишите \"!help\""
+                        });
                             break;
                         }
-
-                        /*System.Threading.Thread.Sleep(3000);
-                        if (msg.Attachments.Count > 0)
-                        {
-                            
-
-                            _vkApi.Messages.Send(new MessagesSendParams
-                            {
-                                RandomId = new DateTime().Minute,
-                                PeerId = msg.PeerId.Value,
-                                Message = "Отстань"
-                            });
-                            break;
-                            var photos = _vkApi.Photo.Get(new PhotoGetParams
-                            {
-                                AlbumId = PhotoAlbumType.Id(273064435),
-                                OwnerId = _vkApi.UserId.Value
-                            });
-                            _vkApi.Messages.Send(new MessagesSendParams
-                            {
-                                RandomId = new DateTime().Millisecond,
-                                Attachments = photos,
-                                Message = "Message",
-                                PeerId = _vkApi.UserId.Value
-                            });
-                            break;*/
-
                     
 
                     }

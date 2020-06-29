@@ -15,3 +15,4 @@ C:\Users\User\Desktop\q\VkNetCallbackTemplate-master\VkBot\bin\Debug\netcoreapp2
 C:\Users\User\Desktop\q\VkNetCallbackTemplate-master\VkBot\obj\Debug\netcoreapp2.2\VkBot.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\q\VkNetCallbackTemplate-master\VkBot\obj\Debug\netcoreapp2.2\VkBot.dll
 C:\Users\User\Desktop\q\VkNetCallbackTemplate-master\VkBot\obj\Debug\netcoreapp2.2\VkBot.pdb
+C:\Users\User\Desktop\q\VkNetCallbackTemplate-master\VkBot\obj\Debug\netcoreapp2.2\VkBot.csprojAssemblyReference.cache

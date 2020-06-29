@@ -12,129 +12,290 @@ namespace VkBot
     public class Search
     {
 
-            Tuple<string, string>[] a = new Tuple<string, string>[5];
+        Tuple<string, string>[] val = new Tuple<string, string>[5];
+        Tuple<string, string>[] regs = new Tuple<string, string>[30];
 
-            public List<string> answ = new List<string>();
-            public Search()
-            {
-            a[0] = new Tuple<string, string>("CHF", "Франк");
-            a[1] = new Tuple<string, string>("JPY", "Йена");
-            a[2] = new Tuple<string, string>("EUR", "Евро");
-            a[3] = new Tuple<string, string>("GBP", "Фунт");
-            a[4] = new Tuple<string, string>("USD", "Доллар");
-            }
-        public string s1;
-        public string s2;
-        public string getName(string val)
+        public List<string> answ = new List<string>();
+        public Search()
         {
-            s1 = val;
+            val[0] = new Tuple<string, string>("CNY", "Юань");
+            val[1] = new Tuple<string, string>("JPY", "Йена");
+            val[2] = new Tuple<string, string>("EUR", "Евро");
+            val[3] = new Tuple<string, string>("GBP", "Фунт");
+            val[4] = new Tuple<string, string>("USD", "Доллар");
+
+            regs[0] = new Tuple<string, string>("Россия", "");
+            regs[1] = new Tuple<string, string>("Москва", "moskva");
+            regs[2] = new Tuple<string, string>("Санкт-Перербург", "sankt-peterburg");
+            regs[3] = new Tuple<string, string>("Екатеринбург", "ekaterinburg");
+            regs[4] = new Tuple<string, string>("Казань", "kazan");
+            regs[5] = new Tuple<string, string>("Оренбург", "orenburg");
+            regs[6] = new Tuple<string, string>("Новосибирск", "novosibirsk");
+            regs[7] = new Tuple<string, string>("Томск", "tomsk");
+            regs[8] = new Tuple<string, string>("Самара", "samara");
+            regs[9] = new Tuple<string, string>("Челябинск", "chelyabinsk");
+            regs[10] = new Tuple<string, string>("Ростов", "rostov-na-donu");
+            regs[11] = new Tuple<string, string>("Уфа", "ufa");
+            regs[12] = new Tuple<string, string>("Красноярск", "krasnoyarsk");
+            regs[13] = new Tuple<string, string>("Пермь", "perm");
+            regs[14] = new Tuple<string, string>("Воронеж", "voronezh");
+            regs[15] = new Tuple<string, string>("Волгоград", "volgograd");
+            regs[16] = new Tuple<string, string>("Краснодар", "krasnodar");
+            regs[17] = new Tuple<string, string>("Саратов", "saratov");
+            regs[18] = new Tuple<string, string>("Тюмень", "tumen");
+            regs[19] = new Tuple<string, string>("Тольятти", "tolyatti");
+            regs[20] = new Tuple<string, string>("Ижевск", "izhevsk");
+            regs[21] = new Tuple<string, string>("Барнаул", "barnaul");
+            regs[22] = new Tuple<string, string>("Иркутск", "irkutsk");
+            regs[23] = new Tuple<string, string>("Ульяновск", "ulyanovsk");
+            regs[24] = new Tuple<string, string>("Хабаровск", "habarovsk");
+            regs[25] = new Tuple<string, string>("Ярославль", "yaroslavl");
+            regs[26] = new Tuple<string, string>("Владивосток", "vladivostok");
+            regs[27] = new Tuple<string, string>("Махачкала", "mahachkala");
+            regs[28] = new Tuple<string, string>("Омск", "omsk");
+            regs[29] = new Tuple<string, string>("Нижний Новгород", "nizhniy-novgorod");
+
+        }
+        public string v1;
+        public string v2;
+        public string r;
+        public bool command(string val1)
+        {
+            if (val1 == "!help")
+            {
+                answ.Add("Для получения информации о боте введите \"!гайд\"");
+                answ.Add("Для получения списка городов введите \"!города\"");
+                answ.Add("Для получения списка валют введите \"!валюты\"");
+                answ.Add("Для получения справки по поиску курса валюты за определенную дату введите\"!цб\"");
+                return true;
+            }
+            if (val1 == "!гайд")
+            {
+                answ.Add("Укажите в сообщении валюту, информацию о которой желаете получить.");
+                answ.Add("(Опционально)Укажите в сообщении город, чтобы данные были локальными, а не по всей России");
+                return true;
+            }
+            if (val1 == "!города")
+            {
+                for (int i = 1; i < 30; i++)
+                {
+                    answ.Add(regs[i].Item1);
+
+                }
+
+                return true;
+            }
+            if (val1 == "!валюты")
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    answ.Add(val[i].Item1 + " или " + val[i].Item2);
+
+                }
+                return true;
+            }
+            if (val1 == "!цб")
+            {
+                answ.Add("Введите \"!цб *Валюта(3 символа)* *дата*\" для получения курса валюты определенного цб за введенную дату");
+                answ.Add("Пример \"!цб EUR 11.11.2019\"");
+                return true;
+            }
+            if (val1.Contains("!цб") && (val1.Length > 5))
+            {
+                //val1.Substring(4, val1.Length - 4);
+                Console.WriteLine(val1.Substring(4, val1.Length - 4));
+                searchDate(val1.Substring(4, val1.Length - 4));
+                return true;
+            }
+            return false;
+
+        }
+        public string getVal(string val1)
+        {
+            v1 = val1;
             for (int t = 0; t < 5; t++)
             {
-                if (s1 == a[t].Item1)
+                if (v1.ToLower().Contains(val[t].Item1.ToLower()))
                 {
-                    s2 = a[t].Item2;
-                    return s2;
+                    v2 = val[t].Item1;
+                    if (val[t].Item1 == "JPY")
+                    {
+                        answ.Add(val[t].Item1 + " " + val[t].Item2 + " (100 ед)");
+                    }
+                    else
+                    {
+                        answ.Add(val[t].Item1 + " " + val[t].Item2);
+                    }
+                    return v2;
+                }
+
+
+            }
+            for (int t = 0; t < 5; t++)
+            {
+                if (v1.ToLower().Contains(val[t].Item2.Substring(0, val[t].Item2.Length - 1).ToLower()))
+                {
+                    v2 = val[t].Item1;
+                    if (val[t].Item1 == "JPY")
+                    {
+                        answ.Add(val[t].Item1 + " " + val[t].Item2 + " (100 ед)");
+                    }
+                    else
+                    {
+                        answ.Add(val[t].Item1 + " " + val[t].Item2);
+                    }
+                    return v2;
+                }
+            }
+            return v2;
+        }
+        public string getReg()
+        {
+            for (int t = 0; t < 29; t++)
+            {
+                if (v1.ToLower().Contains(regs[t].Item1.Substring(0, regs[t].Item1.Length - 1).ToLower()))
+                {
+                    r = regs[t].Item2;
+                    answ.Add("г. " + regs[t].Item1);
+                    return r;
                 }
 
             }
-            return s2;
-        }
-            public string printResult()
+
+            if (v1.ToLower().Contains(regs[29].Item1.Substring(7, regs[29].Item1.Length - 7).ToLower()))
             {
-                string res = "";
-                if (answ.Count > 4)
-                {
-                    for (int i = 0; i < answ.Count; i++)
-                    {
-                        res += answ[i] + '\n';
-                    }
-                return res;
-                }
-                else
-                {
-                    return "Введи нормальное что-то \nВот список: CHF, JPY, EUR, GBP, USD";
-                }
+                r = regs[29].Item2;
+                answ.Add("г. " + regs[29].Item1);
+                return r;
             }
-        public void searchOth(string val)
+            return r;
+        }
+        public string printResult()
+        {
+            string res = "";
+            if (answ.Count > 0)
+            {
+                for (int i = 0; i < answ.Count; i++)
+                {
+                    res += answ[i] + '\n';
+                }
+                return res;
+            }
+            return "Чтобы получить справку по командам напишите \"!help\"";
+        }
+        public void searchOth(string mess)
         {
 
-            string[] urls = new string[6];
-            urls[0] = "https://ru.myfin.by/bank/sberbank/currency/sankt-peterburg";
-            urls[1] = "https://ru.myfin.by/bank/vtb/currency/sankt-peterburg";
-            urls[2] = "https://ru.myfin.by/bank/gazprombank/currency/sankt-peterburg";
-            urls[3] = "https://ru.myfin.by/bank/alfabank/currency/sankt-peterburg";
-            urls[4] = "https://ru.myfin.by/bank/mkb/currency/sankt-peterburg";
-            urls[5] = "https://ru.myfin.by/bank/bspb/currency/sankt-peterburg";
-
-            if (!getName(val).IsNullOrEmpty())
+            bool check = command(mess);
+            if (check)
             {
-                CQ dom0 = CQ.CreateFromUrl("https://ru.myfin.by/bank/sberbank/currency/sankt-peterburg");
+
+            }
+            else
+            {
+                string curVal = getVal(mess);
+                if (!curVal.IsNullOrEmpty())
+                {
+                    string urlMain = "https://ru.myfin.by/currency";
+                    //Console.WriteLine(curVal);
+                    string curReg = getReg();
+                    string curUrl = urlMain + "/" + curVal + "/" + curReg;
+                    //Console.WriteLine(curUrl);
+                    CQ dom0 = CQ.CreateFromUrl(curUrl);
+                    int tr = 0;
+                    foreach (IDomObject obj in dom0.Find("td"))
+                    {
+                        if (tr == 0)
+                        {
+                            if (obj.ClassName == "bank_name")
+                            {
+                                answ.Add(obj.Cq().Text());
+                                //Console.WriteLine(obj.Cq().Text());
+                                tr = 2;
+                                continue;
+                            }
+                        }
+                        if (tr == 2)
+                        {
+                            answ.Add(obj.Cq().Text());
+                            //Console.WriteLine(obj.Cq().Text());
+                            tr--;
+                            continue;
+                        }
+                        if (tr == 1)
+                        {
+                            answ.Add(obj.Cq().Text());
+                            //Console.WriteLine(obj.Cq().Text());
+                            tr--;
+                            continue;
+                        }
+
+                    }
+                }
+
+
+
+            }
+
+
+        }
+
+        public void searchDate(string mess)
+        {
+            string urlMain = "http://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=";
+            string[] inf = mess.Split(' ', 2);
+            if (inf[0].Length != 3 && inf[1].Length != 10)
+            {
+
+            }
+            else
+            {
+                for (int t = 0; t < 5; t++)
+                {
+                    if (inf[0] == val[t].Item1)
+                    {
+                        v2 = val[t].Item1;
+                        answ.Add("Курс " + val[t].Item2 + " (" + val[t].Item1 + ") на " + inf[1] + " от Цб:");
+
+                    }
+                }
+                string curUrl = urlMain + inf[1];
+                //Console.WriteLine(curUrl);
+                CQ dom0 = CQ.CreateFromUrl(curUrl);
                 int tr = 0;
+                int amount = 1;
                 foreach (IDomObject obj in dom0.Find("td"))
                 {
                     if (tr == 0)
                     {
-                        if (obj.InnerHTML.Contains(s1.ToLower()))
+                        if (obj.Cq().Text() == inf[0])
                         {
                             tr = 3;
+                            continue;
                         }
                     }
-                    if (tr > 1)
+                    if (tr == 3)
+                    {
+                        amount = Convert.ToInt32(obj.Cq().Text());
+                        tr--;
+                        continue;
+                    }
+                    if (tr == 2)
                     {
                         tr--;
+                        continue;
                     }
                     if (tr == 1)
                     {
-                        answ.Add("Курс Цб\n" + obj.InnerText);
+                        answ.Add((Convert.ToDouble(obj.Cq().Text()) / amount).ToString() + " руб. за единицу");
                         break;
                     }
-
                 }
-                for (int j = 0; j < urls.Length; j++)
-                {
-                    
-                    CQ dom = CQ.CreateFromUrl(urls[j]);
-                    int i = 0;
-                    foreach (IDomObject obj in dom.Find("td"))
-                    {
-                        if (i < 0)
-                        {
-                            break;
-                        }
-                        if (i == 0)
-                        {
-                            if (obj.InnerHTML.Contains(s1.ToLower()))
-                            {
-                                i = 2;
-                            }
-                        }
-                        else
-                        {
-                            switch (i)
-                            {
-                                case 1:
-                                    answ.Add(obj.InnerText);
-                                    i = i - 2;
-                                    break;
-                                case 2:
-                                    string[] qq = urls[j].Split('/');
-                                    answ.Add(qq[4].ToUpper());
-                                    answ.Add(obj.InnerText);
-                                    i--;
-                                    break;
-                                default:
-                                    break;
-
-                            }
-                        }
 
 
-                    }
 
-                }
             }
+
         }
-        
-        
     }
 }
