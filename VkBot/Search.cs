@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CsQuery;
 using CsQuery.ExtensionMethods.Internal;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using VkNet.Exception;
 
 namespace VkBot
 {
@@ -338,7 +339,10 @@ namespace VkBot
                     if (tr == 1)
                     {
                         answ.Add(obj.Cq().Text() + " руб. за " + amount + " ед.");
-                        if(realDate != inf[1].Substring(6, inf[1].Length-6))
+                        if(realDate != inf[1].Substring(6, inf[1].Length - 6))
+                        {
+                            answ.Add("Проверьте корректость введенных данных" + inf[1]);
+                        }
                         break;
                     }
                 }
