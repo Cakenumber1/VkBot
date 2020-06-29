@@ -85,6 +85,7 @@ namespace VkBot.Controllers
                             {
                                 RandomId = new DateTime().Millisecond,
                                 PeerId = msg.PeerId.Value,
+                                //Are you dumb, stupid, or dumb?
                                 Message = "Чтобы получить справку по командам напишите \"!help\""
                         });
                             break;
