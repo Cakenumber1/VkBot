@@ -37,7 +37,7 @@ namespace VkBot
 
             regs[0] = new Tuple<string, string>("Россия", "");
             regs[1] = new Tuple<string, string>("Москва", "moskva");
-            regs[2] = new Tuple<string, string>("Санкт-Перербург", "sankt-peterburg");
+            regs[2] = new Tuple<string, string>("Спб", "sankt-peterburg");
             regs[3] = new Tuple<string, string>("Екатеринбург", "ekaterinburg");
             regs[4] = new Tuple<string, string>("Казань", "kazan");
             regs[5] = new Tuple<string, string>("Оренбург", "orenburg");
