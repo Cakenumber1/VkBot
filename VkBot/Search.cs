@@ -22,7 +22,7 @@ namespace VkBot
         {
             sorters[0] = "недорог";
             sorters[1] = "дешев";
-            sorters[2] = "купить";
+            sorters[2] = "купи";
             sorters[3] = "покуп";
             sorters[4] = "приобре";
             sorters[5] = "прода";
