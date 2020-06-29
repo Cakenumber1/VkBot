@@ -19,7 +19,7 @@ namespace VkBot
         public Search()
         {
             val[0] = new Tuple<string, string>("CNY", "Юань");
-            val[1] = new Tuple<string, string>("JPY", "Йена");
+            val[1] = new Tuple<string, string>("JPY", "Иена");
             val[2] = new Tuple<string, string>("EUR", "Евро");
             val[3] = new Tuple<string, string>("GBP", "Фунт");
             val[4] = new Tuple<string, string>("USD", "Доллар");
