@@ -309,9 +309,13 @@ namespace VkBot
                 string realDate = "";
                 foreach (IDomObject obj in dom0.Find("button"))
                 {
-                    realDate = obj.Cq().Text();
-                    answ.Add("За " + realDate + " от Цб");
-                    break;
+                    if(obj.ClassName== "datepicker-filter_button")
+                    {
+                        realDate = obj.Cq().Text();
+                        answ.Add("За " + realDate + " от Цб");
+                        break;
+                    }
+
                 }
                 int tr = 0;
                 int amount = 1;
@@ -341,7 +345,7 @@ namespace VkBot
                         answ.Add(obj.Cq().Text() + " руб. за " + amount + " ед.");
                         if(realDate != inf[1].Substring(6, inf[1].Length - 6))
                         {
-                            answ.Add("Проверьте корректость введенных данных" + inf[1]);
+                            answ.Add("Проверьте корректость введенных данных " + inf[1]);
                         }
                         break;
                     }
