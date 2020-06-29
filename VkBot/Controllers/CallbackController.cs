@@ -54,18 +54,11 @@ namespace VkBot.Controllers
                             string test;
                             if (msg.Text.Contains("@botnumbernotone"))
                             {
-                                test = msg.Text.LastIndexOf("@botnumbernotone").ToString();
-                                _vkApi.Messages.Send(new MessagesSendParams
-                                {
-                                    RandomId = new DateTime().Minute,
-                                    PeerId = msg.PeerId.Value,
-                                    Message = msg.Text
-                                });
-                                break;
+                                test = msg.Text.ToLower();
                             }
                             else
                             {
-                                test = msg.Text;
+                                test = msg.Text.ToUpper();
                             }
 
                             _vkApi.Messages.Send(new MessagesSendParams
