@@ -58,7 +58,7 @@ namespace VkBot.Controllers
                             }
                             else
                             {
-                                test = msg.Text.ToUpper();
+                                test = msg.Text;
                             }
 
                             _vkApi.Messages.Send(new MessagesSendParams
