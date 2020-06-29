@@ -287,7 +287,7 @@ namespace VkBot
                     }
                     if (tr == 1)
                     {
-                        answ.Add((Convert.ToDouble(obj.Cq().Text()) / amount).ToString() + " руб. за единицу");
+                        answ.Add(obj.Cq().Text() + " руб. за "+ amount);
                         break;
                     }
                 }
