@@ -61,7 +61,7 @@ namespace VkBot
         public string r;
         public bool command(string val1)
         {
-            if (val1 == "!help")
+            if (val1 == "!help" || val1 == "@botnumbernotone !help")
             {
                 answ.Add("Для получения информации о боте введите \"!гайд\"");
                 answ.Add("Для получения списка городов введите \"!города\"");
@@ -69,13 +69,13 @@ namespace VkBot
                 answ.Add("Для получения справки по поиску курса валюты за определенную дату введите\"!цб\"");
                 return true;
             }
-            if (val1 == "!гайд")
+            if (val1 == "!гайд" || val1 == "@botnumbernotone !гайд")
             {
                 answ.Add("Укажите в сообщении валюту, информацию о которой желаете получить.");
                 answ.Add("(Опционально)Укажите в сообщении город, чтобы данные были локальными, а не по всей России");
                 return true;
             }
-            if (val1 == "!города")
+            if (val1 == "!города" || val1 == "@botnumbernotone !города")
             {
                 for (int i = 1; i < 30; i++)
                 {
@@ -85,7 +85,7 @@ namespace VkBot
 
                 return true;
             }
-            if (val1 == "!валюты")
+            if (val1 == "!валюты" || val1 == "@botnumbernotone !валюты")
             {
                 for (int i = 0; i < 5; i++)
                 {
@@ -94,17 +94,24 @@ namespace VkBot
                 }
                 return true;
             }
-            if (val1 == "!цб")
+            if (val1 == "!цб" || val1 == "@botnumbernotone !цб")
             {
                 answ.Add("Введите \"!цб *Валюта(3 символа)* *дата*\" для получения курса валюты определенного цб за введенную дату");
                 answ.Add("Пример \"!цб EUR 11.11.2019\"");
                 return true;
             }
-            if (val1.Contains("!цб") && (val1.Length > 5))
+            if (val1.StartsWith("!цб") && (val1.Length > 5))
             {
                 //val1.Substring(4, val1.Length - 4);
-                Console.WriteLine(val1.Substring(4, val1.Length - 4));
+                //Console.WriteLine(val1.Substring(4, val1.Length - 4));
                 searchDate(val1.Substring(4, val1.Length - 4));
+                return true;
+            }
+            if (val1.StartsWith("@botnumbernotone !цб") && (val1.Length > 5))
+            {
+                //val1.Substring(4, val1.Length - 4);
+                //Console.WriteLine(val1.Substring(21, val1.Length - 21));
+                searchDate(val1.Substring(21, val1.Length - 21));
                 return true;
             }
             return false;
