@@ -40,32 +40,32 @@ namespace VkBot
             regs[0] = new Tuple<string, string>("Россия", "");
             regs[1] = new Tuple<string, string>("Москва", "moskva");
             regs[2] = new Tuple<string, string>("Спб", "sankt-peterburg");
-            regs[3] = new Tuple<string, string>("Екатеринбург", "ekaterinburg");
-            regs[4] = new Tuple<string, string>("Казань", "kazan");
-            regs[5] = new Tuple<string, string>("Оренбург", "orenburg");
-            regs[6] = new Tuple<string, string>("Новосибирск", "novosibirsk");
-            regs[7] = new Tuple<string, string>("Томск", "tomsk");
-            regs[8] = new Tuple<string, string>("Самара", "samara");
-            regs[9] = new Tuple<string, string>("Челябинск", "chelyabinsk");
-            regs[10] = new Tuple<string, string>("Ростов", "rostov-na-donu");
-            regs[11] = new Tuple<string, string>("Уфа", "ufa");
-            regs[12] = new Tuple<string, string>("Красноярск", "krasnoyarsk");
-            regs[13] = new Tuple<string, string>("Пермь", "perm");
-            regs[14] = new Tuple<string, string>("Воронеж", "voronezh");
-            regs[15] = new Tuple<string, string>("Волгоград", "volgograd");
-            regs[16] = new Tuple<string, string>("Краснодар", "krasnodar");
-            regs[17] = new Tuple<string, string>("Саратов", "saratov");
-            regs[18] = new Tuple<string, string>("Тюмень", "tumen");
-            regs[19] = new Tuple<string, string>("Тольятти", "tolyatti");
-            regs[20] = new Tuple<string, string>("Ижевск", "izhevsk");
-            regs[21] = new Tuple<string, string>("Барнаул", "barnaul");
-            regs[22] = new Tuple<string, string>("Иркутск", "irkutsk");
-            regs[23] = new Tuple<string, string>("Ульяновск", "ulyanovsk");
-            regs[24] = new Tuple<string, string>("Хабаровск", "habarovsk");
-            regs[25] = new Tuple<string, string>("Ярославль", "yaroslavl");
-            regs[26] = new Tuple<string, string>("Владивосток", "vladivostok");
-            regs[27] = new Tuple<string, string>("Махачкала", "mahachkala");
-            regs[28] = new Tuple<string, string>("Омск", "omsk");
+            regs[3] = new Tuple<string, string>("Екб", "ekaterinburg");
+            regs[4] = new Tuple<string, string>("Оренбург", "orenburg");
+            regs[5] = new Tuple<string, string>("Новосибирск", "novosibirsk");
+            regs[6] = new Tuple<string, string>("Томск", "tomsk");
+            regs[7] = new Tuple<string, string>("Омск", "omsk");
+            regs[8] = new Tuple<string, string>("Челябинск", "chelyabinsk");
+            regs[9] = new Tuple<string, string>("Ростов", "rostov-na-donu");
+            regs[10] = new Tuple<string, string>("Красноярск", "krasnoyarsk");
+            regs[11] = new Tuple<string, string>("Воронеж", "voronezh");
+            regs[12] = new Tuple<string, string>("Волгоград", "volgograd");
+            regs[13] = new Tuple<string, string>("Краснодар", "krasnodar");
+            regs[14] = new Tuple<string, string>("Саратов", "saratov");
+            regs[15] = new Tuple<string, string>("Владивосток", "vladivostok");
+            regs[16] = new Tuple<string, string>("Ижевск", "izhevsk");
+            regs[17] = new Tuple<string, string>("Барнаул", "barnaul");
+            regs[18] = new Tuple<string, string>("Иркутск", "irkutsk");
+            regs[19] = new Tuple<string, string>("Ульяновск", "ulyanovsk");
+            regs[20] = new Tuple<string, string>("Хабаровск", "habarovsk");
+            regs[21] = new Tuple<string, string>("Казань", "kazan");
+            regs[22] = new Tuple<string, string>("Самара", "samara");
+            regs[23] = new Tuple<string, string>("Уфа", "ufa");
+            regs[24] = new Tuple<string, string>("Пермь", "perm");
+            regs[25] = new Tuple<string, string>("Тюмень", "tumen");
+            regs[26] = new Tuple<string, string>("Тольятти", "tolyatti");
+            regs[27] = new Tuple<string, string>("Ярославль", "yaroslavl");
+            regs[28] = new Tuple<string, string>("Махачкала", "mahachkala");
             regs[29] = new Tuple<string, string>("Нижний Новгород", "nizhniy-novgorod");
 
         }
@@ -79,6 +79,7 @@ namespace VkBot
             {
                 answ.Add("Для получения информации о боте введите \"!гайд\"");
                 answ.Add("Для получения списка городов введите \"!города\"");
+                answ.Add("Для получения информации по конкретному городу введите \"!город *Название города*\"");
                 answ.Add("Для получения списка валют введите \"!валюты\"");
                 answ.Add("Для получения справки по поиску курса валюты за определенную дату введите\"!цб\"");
                 return true;
@@ -99,6 +100,13 @@ namespace VkBot
 
                 return true;
             }
+            if (val1.StartsWith("!город") && (val1.Length > 10))
+            {
+                v1 = val1.Split(' ', 2)[1];
+                getReg();
+
+                return true;
+            }
             if (val1 == "!валюты")
             {
                 for (int i = 0; i < 5; i++)
@@ -114,10 +122,8 @@ namespace VkBot
                 answ.Add("Пример \"!цб EUR 11.11.2019\"");
                 return true;
             }
-            if (val1.StartsWith("!цб") && (val1.Length > 5))
+            if (val1.StartsWith("!цб") && (val1.Length == 18))
             {
-                //val1.Substring(4, val1.Length - 4);
-                //Console.WriteLine(val1.Substring(4, val1.Length - 4));
                 searchDate(val1.Substring(4, val1.Length - 4));
                 return true;
             }
@@ -174,7 +180,28 @@ namespace VkBot
                 answ.Add("г. " + regs[1].Item1);
                 return r;
             }
-            for (int t = 1; t < 29; t++)
+            if (v1.ToLower().Contains(regs[2].Item1.ToLower())|| v1.ToLower().Contains("питер"))
+            {
+                r = regs[2].Item2;
+                answ.Add("г. " + regs[2].Item1);
+                return r;
+            }
+            if (v1.ToLower().Contains(regs[3].Item1.ToLower()) || v1.ToLower().Contains("екатеринбург"))
+            {
+                r = regs[2].Item2;
+                answ.Add("г. " + regs[2].Item1);
+                return r;
+            }
+            for (int t = 4; t < 21; t++)
+            {
+                if (v1.ToLower().Contains(regs[t].Item1.ToLower()))
+                {
+                    r = regs[t].Item2;
+                    answ.Add("г. " + regs[t].Item1);
+                    return r;
+                }
+            }
+            for (int t = 21; t < 29; t++)
             {
                 if (v1.ToLower().Contains(regs[t].Item1.Substring(0, regs[t].Item1.Length - 1).ToLower()))
                 {
@@ -182,9 +209,7 @@ namespace VkBot
                     answ.Add("г. " + regs[t].Item1);
                     return r;
                 }
-
             }
-
             if (v1.ToLower().Contains(regs[29].Item1.Substring(7, regs[29].Item1.Length - 7).ToLower()))
             {
                 r = regs[29].Item2;
