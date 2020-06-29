@@ -52,14 +52,14 @@ namespace VkBot.Controllers
                         if (!msg.Text.IsNullOrEmpty())
                         {
                             string test;
-                            if (msg.Text.StartsWith("@botnumbernotone"))
+                            if (msg.Text.Contains("@botnumbernotone"))
                             {
-                                test = msg.Text.Substring(17, msg.Text.Length - 17);
+                                test = msg.Text.LastIndexOf("@botnumbernotone").ToString();
                                 _vkApi.Messages.Send(new MessagesSendParams
                                 {
                                     RandomId = new DateTime().Minute,
                                     PeerId = msg.PeerId.Value,
-                                    Message = test
+                                    Message = msg.Text
                                 });
                                 break;
                             }
