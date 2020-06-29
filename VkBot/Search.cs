@@ -166,7 +166,13 @@ namespace VkBot
         }
         public string getReg()
         {
-            for (int t = 0; t < 29; t++)
+            if (v1.ToLower().Contains(regs[1].Item1.Substring(0, regs[1].Item1.Length - 2).ToLower()))
+            {
+                r = regs[1].Item2;
+                answ.Add("г. " + regs[1].Item1);
+                return r;
+            }
+            for (int t = 1; t < 29; t++)
             {
                 if (v1.ToLower().Contains(regs[t].Item1.Substring(0, regs[t].Item1.Length - 1).ToLower()))
                 {
