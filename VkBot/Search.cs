@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CsQuery;
 using CsQuery.ExtensionMethods.Internal;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Localization.Internal;
 using VkNet.Exception;
 
 namespace VkBot
@@ -292,10 +293,14 @@ namespace VkBot
             string[] inf = mess.Split(' ', 2);
             if (inf[0].Length != 3 && inf[1].Length != 10)
             {
-
+                
             }
             else
             {
+                if(Convert.ToInt32(inf[1].Substring(6, inf[1].Length - 6)) < 1993)
+                {
+                    answ.Add("Курсы волют предоставляются начиная с 1993 года");
+                }
                 for (int t = 0; t < 5; t++)
                 {
                     if (inf[0] == val[t].Item1)
