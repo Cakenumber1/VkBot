@@ -65,7 +65,7 @@ namespace VkBot.Controllers
                             {
                                 RandomId = new DateTime().Minute,
                                 PeerId = msg.PeerId.Value,
-                                Message = msg.Text
+                                Message = test
                             });
 
                             s.searchOth(test);
