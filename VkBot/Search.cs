@@ -16,14 +16,18 @@ namespace VkBot
         Tuple<string, string, string>[] val = new Tuple<string, string, string>[5];
         Tuple<string, string>[] regs = new Tuple<string, string>[30];
         public List<string> answ = new List<string>();
-        public string[] sorters = new string[4];
+        public string[] sorters = new string[8];
 
         public Search()
         {
             sorters[0] = "недорог";
             sorters[1] = "дешев";
-            sorters[2] = "доступн";
-            sorters[3] = "дорог";
+            sorters[2] = "купить";
+            sorters[3] = "покуп";
+            sorters[4] = "приобре";
+            sorters[5] = "прода";
+            sorters[6] = "дорого";
+            sorters[7] = "дороже";
 
             val[0] = new Tuple<string, string, string>("CNY", "Юань", "19");
             val[1] = new Tuple<string, string, string>("JPY", "Иена","36" );
@@ -184,7 +188,7 @@ namespace VkBot
         }
         public int getSorttype()
         {
-            for (int t = 0; t < 4; t++)
+            for (int t = 0; t < 8; t++)
             {
                 if (v1.ToLower().Contains(sorters[t]))
                 {
@@ -193,7 +197,7 @@ namespace VkBot
                 }
 
             }
-            return -1;
+            return 100;
         }
         public string printResult()
         {
@@ -219,6 +223,7 @@ namespace VkBot
             else
             {
                 string curVal = getVal(mess);
+                int count = 0;
                 if (!curVal.IsNullOrEmpty())
                 {
                     
@@ -234,11 +239,11 @@ namespace VkBot
 
                     }
                     int z = getSorttype();
-                    if (z == 0 || z == 1 || z == 2 )
+                    if (z <= 4 )
                     {
                         curUrl += "?sort=buy_course_"+sortn;
                     }
-                    if (z == 3)
+                    if (z > 4 && z <=8 )
                     {
                         curUrl += "?sort=-sell_course_"+sortn;
                     }
@@ -247,7 +252,7 @@ namespace VkBot
                     int tr = 0;
                     foreach (IDomObject obj in dom0.Find("td"))
                     {
-                        if (tr == 0)
+                        if (tr == 0 && count < 5)
                         {
                             if (obj.ClassName == "bank_name")
                             {
@@ -266,6 +271,7 @@ namespace VkBot
                         {
                             answ.Add(obj.Cq().Text());
                             tr--;
+                            count++;
                             continue;
                         }
                     }
