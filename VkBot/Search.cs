@@ -224,14 +224,14 @@ namespace VkBot
                     
                     string urlMain = "https://ru.myfin.by/currency";
                     string curReg = getReg();
-                    string curUrl;
-                    if (curReg.Length == 1)
+                    string curUrl = urlMain + "/" + curVal.ToLower() + "/" + curReg;
+                    if (curReg.IsNullOrEmpty())
                     {
-                        curUrl = urlMain + "/" + curVal.ToLower();
+                        curUrl = curUrl.Substring(0, curUrl.Length - 1);
                     }
                     else
                     {
-                        curUrl = urlMain + "/" + curVal.ToLower() + "/" + curReg;
+
                     }
                     int z = getSorttype();
                     if (z == 0 || z == 1 || z == 2 )
