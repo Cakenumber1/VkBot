@@ -51,7 +51,7 @@ namespace VkBot.Controllers
                         var msg = Message.FromJson(new VkResponse(updates.Object));
                         if (!msg.Text.IsNullOrEmpty())
                         {
-                            string test = msg.Text.ToUpper();
+                            string test = msg.Text;
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
                                 RandomId = new DateTime().Minute,
