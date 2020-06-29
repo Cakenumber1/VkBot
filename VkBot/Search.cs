@@ -300,11 +300,18 @@ namespace VkBot
                     if (inf[0] == val[t].Item1)
                     {
                         v2 = val[t].Item1;
-                        answ.Add("Курс " + val[t].Item2 + " (" + val[t].Item1 + ") на " + inf[1] + " от Цб:");
+                        answ.Add("Курс " + val[t].Item2 + " (" + val[t].Item1 + ")");
                     }
                 }
                 string curUrl = urlMain + inf[1];
                 CQ dom0 = CQ.CreateFromUrl(curUrl);
+                string realDate = "";
+                foreach (IDomObject obj in dom0.Find("button"))
+                {
+                    realDate = obj.Cq().Text();
+                    answ.Add("За " + realDate + " от Цб");
+                    break;
+                }
                 int tr = 0;
                 int amount = 1;
                 foreach (IDomObject obj in dom0.Find("td"))
@@ -331,6 +338,7 @@ namespace VkBot
                     if (tr == 1)
                     {
                         answ.Add(obj.Cq().Text() + " руб. за " + amount + " ед.");
+                        if(realDate != inf[1].Substring(6, inf[1].Length-6))
                         break;
                     }
                 }
