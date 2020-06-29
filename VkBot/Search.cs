@@ -100,10 +100,14 @@ namespace VkBot
 
                 return true;
             }
-            if (val1.StartsWith("!город") && (val1.Length > 10))
+            if (val1.StartsWith("!город") && (val1.Length > 9))
             {
                 v1 = val1.Split(' ', 2)[1];
                 getReg();
+                if (answ[0] == "Информация по Рф")
+                    answ[0] = "Город не найден в базе";
+                else
+                    answ[0] += " найден в базе";
 
                 return true;
             }
