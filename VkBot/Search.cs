@@ -227,14 +227,14 @@ namespace VkBot
                     string curUrl;
                     if (curReg.Length == 1)
                     {
-                        curUrl = urlMain + "/" + curVal;
+                        curUrl = urlMain + "/" + curVal.ToLower();
                     }
                     else
                     {
-                        curUrl = urlMain + "/" + curVal + "/" + curReg;
+                        curUrl = urlMain + "/" + curVal.ToLower() + "/" + curReg;
                     }
                     int z = getSorttype();
-                    if (z == 0 || z == 1 || z ==2 )
+                    if (z == 0 || z == 1 || z == 2 )
                     {
                         curUrl += "?sort=buy_course_"+sortn;
                     }
