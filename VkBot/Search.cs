@@ -14,8 +14,8 @@ namespace VkBot
 
         Tuple<string, string>[] val = new Tuple<string, string>[5];
         Tuple<string, string>[] regs = new Tuple<string, string>[30];
-
         public List<string> answ = new List<string>();
+
         public Search()
         {
             val[0] = new Tuple<string, string>("CNY", "Юань");
@@ -94,7 +94,7 @@ namespace VkBot
                 }
                 return true;
             }
-            if (val1 == "!цб" )
+            if (val1 == "!цб")
             {
                 answ.Add("Введите \"!цб *Валюта(3 символа)* *дата*\" для получения курса валюты определенного цб за введенную дату");
                 answ.Add("Пример \"!цб EUR 11.11.2019\"");
@@ -129,8 +129,6 @@ namespace VkBot
                     }
                     return v2;
                 }
-
-
             }
             for (int t = 0; t < 5; t++)
             {
@@ -198,10 +196,8 @@ namespace VkBot
                 if (!curVal.IsNullOrEmpty())
                 {
                     string urlMain = "https://ru.myfin.by/currency";
-                    //Console.WriteLine(curVal);
                     string curReg = getReg();
                     string curUrl = urlMain + "/" + curVal + "/" + curReg;
-                    //Console.WriteLine(curUrl);
                     CQ dom0 = CQ.CreateFromUrl(curUrl);
                     int tr = 0;
                     foreach (IDomObject obj in dom0.Find("td"))
@@ -211,7 +207,6 @@ namespace VkBot
                             if (obj.ClassName == "bank_name")
                             {
                                 answ.Add(obj.Cq().Text());
-                                //Console.WriteLine(obj.Cq().Text());
                                 tr = 2;
                                 continue;
                             }
@@ -219,26 +214,18 @@ namespace VkBot
                         if (tr == 2)
                         {
                             answ.Add(obj.Cq().Text());
-                            //Console.WriteLine(obj.Cq().Text());
                             tr--;
                             continue;
                         }
                         if (tr == 1)
                         {
                             answ.Add(obj.Cq().Text());
-                            //Console.WriteLine(obj.Cq().Text());
                             tr--;
                             continue;
                         }
-
                     }
                 }
-
-
-
             }
-
-
         }
 
         public void searchDate(string mess)
@@ -261,7 +248,6 @@ namespace VkBot
                     }
                 }
                 string curUrl = urlMain + inf[1];
-                //Console.WriteLine(curUrl);
                 CQ dom0 = CQ.CreateFromUrl(curUrl);
                 int tr = 0;
                 int amount = 1;
@@ -288,15 +274,11 @@ namespace VkBot
                     }
                     if (tr == 1)
                     {
-                        answ.Add(obj.Cq().Text() + " руб. за "+ amount);
+                        answ.Add(obj.Cq().Text() + " руб. за " + amount + " ед.");
                         break;
                     }
                 }
-
-
-
             }
-
         }
     }
 }

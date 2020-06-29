@@ -16,12 +16,8 @@ namespace VkBot.Controllers
     [ApiController]
     public class CallbackController : ControllerBase
     {
-        /// <summary>
-        /// Конфигурация приложения
-        /// </summary>
 
         private readonly IConfiguration _configuration;
-
         private readonly IVkApi _vkApi;
 
         public CallbackController(IVkApi vkApi, IConfiguration configuration)
@@ -33,21 +29,18 @@ namespace VkBot.Controllers
         [HttpPost]
         public IActionResult Callback([FromBody] Updates updates)
         {
-            // Тип события
+
             switch (updates.Type)
             {
-                // Ключ-подтверждение
+
                 case "confirmation":
                     {
                         return Ok(_configuration["Config:Confirmation"]);
                     }
 
-                // Новое сообщение
                 case "message_new":
-                    {
-
+                    { 
                         Search s = new Search();
-                        // Десериализация
                         var msg = Message.FromJson(new VkResponse(updates.Object));
                         if (!msg.Text.IsNullOrEmpty())
                         {
@@ -70,7 +63,6 @@ namespace VkBot.Controllers
 
                             s.searchOth(test);
                             string send = s.printResult();
-                            //ответ
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
                                 RandomId = new DateTime().Millisecond,
@@ -87,10 +79,10 @@ namespace VkBot.Controllers
                                 PeerId = msg.PeerId.Value,
                                 //Are you dumb, stupid, or dumb?
                                 Message = "Чтобы получить справку по командам напишите \"!help\""
-                        });
+                            });
                             break;
                         }
-                    
+
 
                     }
             }

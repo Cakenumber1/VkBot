@@ -29,7 +29,8 @@ namespace VkBot
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSingleton<IVkApi>(sp => {
+            services.AddSingleton<IVkApi>(sp =>
+            {
                 var api = new VkApi();
                 api.Authorize(new ApiAuthParams { AccessToken = Configuration["Config:AccessToken"] });
                 return api;
