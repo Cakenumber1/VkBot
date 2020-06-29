@@ -229,7 +229,15 @@ namespace VkBot
             {
                 if (v1.ToLower().Contains(sorters[t]))
                 {
-
+                    answ.Add("Результат отсортирован по ");
+                    if (t <= 4)
+                    {
+                        answ.Add("Цене продажи валюты на руки");
+                    }
+                    else
+                    {
+                        answ.Add("Цене продажи валюты в банк");
+                    }
                     return t;
                 }
 
