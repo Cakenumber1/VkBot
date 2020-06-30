@@ -45,7 +45,7 @@ namespace VkBot.Controllers
                         if (!msg.Text.IsNullOrEmpty())
                         {
                             string test;
-                            string test2;
+                            
                             if (msg.Text.Contains("@botnumbernotone"))
                             {
                                 test = msg.Text.Substring(33, msg.Text.Length - 33);
@@ -54,7 +54,9 @@ namespace VkBot.Controllers
                             {
                                 test = msg.Text;
                             }
-                            test2 = s.logsCall(test);
+                            int l1 = test.Length;
+                            test = s.logsCall(test);
+                            
 
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
@@ -65,7 +67,7 @@ namespace VkBot.Controllers
 
                             s.searchOth(test);
                             string send;
-                            if (test2.Length != test.Length)
+                            if (test.Length != l1)
                             {
                                 send = s.printLogs();
                             }
