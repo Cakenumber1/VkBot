@@ -87,6 +87,7 @@ namespace VkBot
         public bool command(string val1)
         {
             log.Add("command func started");
+            log.Add(val1);
             if (val1 == "!help")
             {
                 answ.Add(">Для получения информации о боте введите \"!гайд\"");
