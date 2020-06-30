@@ -142,7 +142,7 @@ namespace VkBot
                 log.Add("command !цб call");
                 return true;
             }
-            if (val1.StartsWith("!цб") && (val1.Length == 18))
+            if (val1.StartsWith("!цб") && (val1.Length >= 18))
             {
                 log.Add("command !цб " + val1.Substring(4, val1.Length - 4) + " call");
                 searchDate(val1.Substring(4, val1.Length - 4));
@@ -273,8 +273,9 @@ namespace VkBot
                     }
                     return t;
                 }
-                log.Add("нет сортировки");
+                
             }
+            log.Add("нет сортировки");
             return 100;
         }
         public string printLogs()
