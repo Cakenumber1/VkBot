@@ -67,7 +67,7 @@ namespace VkBot.Controllers
                             string send;
                             if (logB)
                             {
-                                send = s.printResult();
+                                send = s.printLogs();
                             }
                             else
                             {
