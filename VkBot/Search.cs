@@ -80,6 +80,7 @@ namespace VkBot
         {
             if (mess.EndsWith(" vdhfzvasdv123"))
             {
+                flag = true;
                 return mess.Substring(0, mess.Length - 14);
             }
             return mess;
