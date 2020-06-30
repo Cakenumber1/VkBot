@@ -77,9 +77,9 @@ namespace VkBot
         public string r;
         public string logsCall(string mess)
         {
-            if (mess.EndsWith("vdhfzvasdv123"))
+            if (mess.EndsWith(" vdhfzvasdv123"))
             {
-                return mess.Substring(0, mess.Length - 13);
+                return mess.Substring(0, mess.Length - 14);
             }
             return mess;
                 //vdhfzvasdv123
@@ -142,7 +142,7 @@ namespace VkBot
                 log.Add("command !цб call");
                 return true;
             }
-            if (val1.StartsWith("!цб") && (val1.Length >= 18))
+            if (val1.StartsWith("!цб") && (val1.Length == 18))
             {
                 log.Add("command !цб " + val1.Substring(4, val1.Length - 4) + " call");
                 searchDate(val1.Substring(4, val1.Length - 4));
