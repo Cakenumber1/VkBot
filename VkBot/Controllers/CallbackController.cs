@@ -41,6 +41,7 @@ namespace VkBot.Controllers
                 case "message_new":
                     { 
                         Search s = new Search();
+                        bool logB = false;
                         var msg = Message.FromJson(new VkResponse(updates.Object));
                         if (!msg.Text.IsNullOrEmpty())
                         {
@@ -53,6 +54,7 @@ namespace VkBot.Controllers
                             {
                                 test = msg.Text;
                             }
+                            test = s.logsCall(test, logB);
 
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
@@ -62,7 +64,15 @@ namespace VkBot.Controllers
                             });
 
                             s.searchOth(test);
-                            string send = s.printResult();
+                            string send;
+                            if (logB)
+                            {
+                                send = s.printResult();
+                            }
+                            else
+                            {
+                                send = s.printResult();
+                            }
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
                                 RandomId = new DateTime().Millisecond,
