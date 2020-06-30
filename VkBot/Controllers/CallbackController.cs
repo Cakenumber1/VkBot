@@ -54,7 +54,6 @@ namespace VkBot.Controllers
                             {
                                 test = msg.Text;
                             }
-                            int l1 = test.Length;
                             test = s.logsCall(test);
                             
 
@@ -66,15 +65,7 @@ namespace VkBot.Controllers
                             });
 
                             s.searchOth(test);
-                            string send;
-                            if (test.Length != l1)
-                            {
-                                send = s.printLogs();
-                            }
-                            else
-                            {
-                                send = s.printResult();
-                            }
+                            string send = s.printResult();
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
                                 RandomId = new DateTime().Millisecond,

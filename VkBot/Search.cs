@@ -18,12 +18,13 @@ namespace VkBot
         Tuple<string, string, string>[] val = new Tuple<string, string, string>[5];
         Tuple<string, string>[] regs = new Tuple<string, string>[30];
         public List<string> answ = new List<string>();
-        public List<string> log = new List<string>();
+        //public List<string> log = new List<string>();
         public string[] sorters = new string[8];
+        public bool flag = false;
 
         public Search()
         {
-            log.Add("class Search creation started");
+            if(flag) answ.Add("class Search creation started");
             sorters[0] = "недорог";
             sorters[1] = "дешев";
             sorters[2] = "купи";
@@ -69,7 +70,7 @@ namespace VkBot
             regs[27] = new Tuple<string, string>("Ярославль", "yaroslavl");
             regs[28] = new Tuple<string, string>("Махачкала", "mahachkala");
             regs[29] = new Tuple<string, string>("Нижний Новгород", "nizhniy-novgorod");
-            log.Add("class Search creating finished succesfully");
+            if (flag) answ.Add("class Search creating finished succesfully");
         }
         public string sortn = "";
         public string v1;
@@ -86,8 +87,7 @@ namespace VkBot
         }
         public bool command(string val1)
         {
-            log.Add("command func started");
-            log.Add(val1);
+            if (flag) answ.Add("command func started with "+ val1);
             if (val1 == "!help")
             {
                 answ.Add(">Для получения информации о боте введите \"!гайд\"");
@@ -95,14 +95,14 @@ namespace VkBot
                 answ.Add(">Для получения информации по конкретному городу\nвведите \"!город *Название города*\"");
                 answ.Add(">Для получения списка валют введите \"!валюты\"");
                 answ.Add(">Для получения справки по поиску курса валюты\nза определенную дату введите\"!цб\"");
-                log.Add("command !help call");
+                if (flag) answ.Add("command !help call");
                 return true;
             }
             if (val1 == "!гайд")
             {
                 answ.Add("Укажите в сообщении валюту, информацию о которой желаете получить.");
                 answ.Add("(Опционально)Укажите в сообщении город, чтобы данные были локальными, а не по всей России");
-                log.Add("command !гайд call");
+                if (flag) answ.Add("command !гайд call");
                 return true;
             }
             if (val1 == "!города")
@@ -112,7 +112,7 @@ namespace VkBot
                     answ.Add(regs[i].Item1);
 
                 }
-                log.Add("command !города call");
+                if (flag) answ.Add("command !города call");
                 return true;
             }
             if (val1.StartsWith("!город") && (val1.Length > 9))
@@ -123,7 +123,7 @@ namespace VkBot
                     answ[0] = "Город \""+v1+"\" не найден в базе";
                 else
                     answ[0] += " найден в базе";
-                log.Add("command !город " +v1+" call");
+                if (flag) answ.Add("command !город " +v1+" call");
                 return true;
             }
             if (val1 == "!валюты")
@@ -133,19 +133,19 @@ namespace VkBot
                     answ.Add(val[i].Item1 + " или " + val[i].Item2);
 
                 }
-                log.Add("command !валюты call");
+                if (flag) answ.Add("command !валюты call");
                 return true;
             }
             if (val1 == "!цб")
             {
                 answ.Add("Введите \"!цб *Валюта(3 символа)* *дата*\" для получения курса валюты определенного цб за введенную дату");
                 answ.Add("Пример \"!цб EUR 11.11.2019\"");
-                log.Add("command !цб call");
+                if (flag) answ.Add("command !цб call");
                 return true;
             }
             if (val1.StartsWith("!цб") && (val1.Length == 18))
             {
-                log.Add("command !цб " + val1.Substring(4, val1.Length - 4) + " call");
+                if (flag) answ.Add("command !цб " + val1.Substring(4, val1.Length - 4) + " call");
                 searchDate(val1.Substring(4, val1.Length - 4));
                 return true;
             }
@@ -154,7 +154,7 @@ namespace VkBot
         }
         public string getVal(string val1)
         {
-            log.Add("getVal func started");
+            if (flag) answ.Add("getVal func started with "+val1);
             v1 = val1;
             for (int t = 0; t < 5; t++)
             {
@@ -164,12 +164,10 @@ namespace VkBot
                     if (val[t].Item1 == "JPY")
                     {
                         answ.Add(val[t].Item1 + " " + val[t].Item2 + " (100 ед)");
-                        log.Add(val[t].Item1 + " " + val[t].Item2 + " (100 ед)");
                         sortn = val[t].Item3;
                     }
                     else
                     {
-                        log.Add(val[t].Item1 + " " + val[t].Item2);
                         answ.Add(val[t].Item1 + " " + val[t].Item2);
                         sortn = val[t].Item3;
                     }
@@ -184,42 +182,40 @@ namespace VkBot
                     if (val[t].Item1 == "JPY")
                     {
                         answ.Add(val[t].Item1 + " " + val[t].Item2 + " (100 ед)");
-                        log.Add(val[t].Item1 + " " + val[t].Item2 + " (100 ед)");
+                        if (flag) answ.Add(val[t].Item1 + " " + val[t].Item2 + " (100 ед)");
                         sortn = val[t].Item3;
                     }
                     else
                     {
                         answ.Add(val[t].Item1 + " " + val[t].Item2);
-                        log.Add(val[t].Item1 + " " + val[t].Item2);
+                        if(flag) answ.Add(val[t].Item1 + " " + val[t].Item2);
                         sortn = val[t].Item3;
                     }
                     return v2;
                 }
             }
+            if (flag) answ.Add("getVall nothing found");
             return v2;
         }
         public string getReg()
         {
-            log.Add("getReg func started");
+            if (flag) answ.Add("getReg func started");
             if (v1.ToLower().Contains(regs[1].Item1.Substring(0, regs[1].Item1.Length - 2).ToLower()))
             {
                 r = regs[1].Item2;
                 answ.Add("г. " + regs[1].Item1);
-                log.Add("г. " + regs[1].Item1);
                 return r;
             }
             if (v1.ToLower().Contains(regs[2].Item1.ToLower())|| v1.ToLower().Contains("питер"))
             {
                 r = regs[2].Item2;
                 answ.Add("г. " + regs[2].Item1);
-                log.Add("г. " + regs[2].Item1);
                 return r;
             }
             if (v1.ToLower().Contains(regs[3].Item1.ToLower()) || v1.ToLower().Contains("екатеринбург"))
             {
                 r = regs[2].Item2;
                 answ.Add("г. " + regs[3].Item1);
-                log.Add("г. " + regs[3].Item1);
                 return r;
             }
             for (int t = 4; t < 21; t++)
@@ -228,7 +224,6 @@ namespace VkBot
                 {
                     r = regs[t].Item2;
                     answ.Add("г. " + regs[t].Item1);
-                    log.Add("г. " + regs[t].Item1);
                     return r;
                 }
             }
@@ -238,7 +233,6 @@ namespace VkBot
                 {
                     r = regs[t].Item2;
                     answ.Add("г. " + regs[t].Item1);
-                    log.Add("г. " + regs[t].Item1);
                     return r;
                 }
             }
@@ -246,55 +240,39 @@ namespace VkBot
             {
                 r = regs[29].Item2;
                 answ.Add("г. " + regs[29].Item1);
-                log.Add("г. " + regs[29].Item1);
                 return r;
             }
             answ.Add("Информация по Рф");
-            log.Add("Информация по Рф");
+            if (flag) answ.Add("City not found");
             return r;
         }
         public int getSorttype()
         {
-            log.Add("getSorttype func started");
+            if (flag) answ.Add("getSorttype func started");
             for (int t = 0; t < 8; t++)
             {
                 if (v1.ToLower().Contains(sorters[t]))
                 {
                     answ.Add("Результат отсортирован по ");
-                    log.Add("Результат отсортирован по ");
                     if (t <= 4)
                     {
                         answ.Add("цене продажи валюты на руки");
-                        log.Add("цене продажи валюты на руки");
                     }
                     else
                     {
                         answ.Add("цене продажи валюты в банк");
-                        log.Add("цене продажи валюты в банк");
                     }
                     return t;
                 }
                 
             }
-            log.Add("нет сортировки");
+            if (flag) answ.Add("Sorttype not found");
             return 100;
         }
-        public string printLogs()
-        {
-            log.Add("printlogs func started");
-            string res = "";
-            if (log.Count > 0)
-            {
-                for (int i = 0; i < log.Count; i++)
-                {
-                    res += log[i] + '\n';
-                }
-                return res;
-            }
-            return "Чтобы получить справку по командам напишите \"!help\"";
-        }
+
         public string printResult()
         {
+            if (flag) answ.Add("printResult func started");
             string res = "";
             if (answ.Count > 0)
             {
@@ -304,18 +282,20 @@ namespace VkBot
                 }
                 return res;
             }
+            if (flag) answ.Add("empty answer");
             return "Чтобы получить справку по командам напишите \"!help\"";
         }
         public void searchOth(string mess)
         {
-            log.Add("searchOth func started");
+            if (flag) answ.Add("searchOth func started");
             bool check = command(mess);
             if (check)
             {
-
+                if (flag) answ.Add("bool for command == true");
             }
             else
             {
+                if (flag) answ.Add("bool for command == false");
                 string curVal = getVal(mess);
                 int count = 0;
                 if (!curVal.IsNullOrEmpty())
@@ -341,7 +321,7 @@ namespace VkBot
                     {
                         curUrl += "?sort=-sell_course_"+sortn;
                     }
-                    log.Add(curUrl);
+                    if (flag) answ.Add(curUrl);
                     CQ dom0 = CQ.CreateFromUrl(curUrl);
                     int tr = 0;
                     foreach (IDomObject obj in dom0.Find("td"))
@@ -351,7 +331,6 @@ namespace VkBot
                             if (obj.ClassName == "bank_name")
                             {
                                 answ.Add(obj.Cq().Text());
-                                log.Add(obj.Cq().Text());
                                 tr = 2;
                                 continue;
                             }
@@ -359,14 +338,12 @@ namespace VkBot
                         if (tr == 2)
                         {
                             answ.Add(obj.Cq().Text());
-                            log.Add(obj.Cq().Text());
                             tr--;
                             continue;
                         }
                         if (tr == 1)
                         {
                             answ.Add(obj.Cq().Text());
-                            log.Add(obj.Cq().Text());
                             tr--;
                             count++;
                             continue;
@@ -378,19 +355,18 @@ namespace VkBot
 
         public void searchDate(string mess)
         {
-            log.Add("searchDate func started with string "+mess);
+            if (flag) answ.Add("searchDate func started with string "+mess);
             string urlMain = "http://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=";
             string[] inf = mess.Split(' ', 2);
             if (inf[0].Length != 3 && inf[1].Length != 10)
             {
-                
+                if (flag) answ.Add("wrong format for !цб search");
             }
             else
             {
                 if(Convert.ToInt32(inf[1].Substring(6, inf[1].Length - 6)) < 1993)
                 {
                     answ.Add("Курсы волют предоставляются начиная с 1993 года");
-                    log.Add("Курсы волют предоставляются начиная с 1993 года");
                 }
                 for (int t = 0; t < 5; t++)
                 {
@@ -398,11 +374,10 @@ namespace VkBot
                     {
                         v2 = val[t].Item1;
                         answ.Add("Курс " + val[t].Item2 + " (" + val[t].Item1 + ")");
-                        log.Add("Курс " + val[t].Item2 + " (" + val[t].Item1 + ")");
                     }
                 }
                 string curUrl = urlMain + inf[1];
-                log.Add(curUrl);
+                if (flag) answ.Add(curUrl);
                 CQ dom0 = CQ.CreateFromUrl(curUrl);
                 string realDate = "";
                 foreach (IDomObject obj in dom0.Find("button"))
@@ -411,7 +386,6 @@ namespace VkBot
                     {
                         realDate = obj.Cq().Text();
                         answ.Add("За " + realDate + " от Цб");
-                        log.Add("За " + realDate + " от Цб");
                         break;
                     }
 
@@ -442,11 +416,9 @@ namespace VkBot
                     if (tr == 1)
                     {
                         answ.Add(obj.Cq().Text() + " руб. за " + amount + " ед.");
-                        log.Add(obj.Cq().Text() + " руб. за " + amount + " ед.");
                         if (realDate != inf[1])
                         {
                             answ.Add("Проверьте корректость введенных данных " + inf[1]);
-                            log.Add("Проверьте корректость введенных данных " + inf[1]);
                         }
                         break;
                     }
