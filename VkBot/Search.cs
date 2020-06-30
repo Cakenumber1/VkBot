@@ -84,7 +84,7 @@ namespace VkBot
                 return mess.Substring(0, mess.Length - 14);
             }
             return mess;
-                //vdhfzvasdv123
+                // vdhfzvasdv123
         }
         public bool command(string val1)
         {
