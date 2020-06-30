@@ -41,11 +41,11 @@ namespace VkBot.Controllers
                 case "message_new":
                     { 
                         Search s = new Search();
-                        bool logB = false;
                         var msg = Message.FromJson(new VkResponse(updates.Object));
                         if (!msg.Text.IsNullOrEmpty())
                         {
                             string test;
+                            string test2;
                             if (msg.Text.Contains("@botnumbernotone"))
                             {
                                 test = msg.Text.Substring(33, msg.Text.Length - 33);
@@ -54,7 +54,7 @@ namespace VkBot.Controllers
                             {
                                 test = msg.Text;
                             }
-                            test = s.logsCall(test, logB);
+                            test2 = s.logsCall(test);
 
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
@@ -65,7 +65,7 @@ namespace VkBot.Controllers
 
                             s.searchOth(test);
                             string send;
-                            if (logB)
+                            if (test2.Length != test.Length)
                             {
                                 send = s.printLogs();
                             }
