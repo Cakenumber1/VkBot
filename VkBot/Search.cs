@@ -75,15 +75,12 @@ namespace VkBot
         public string v1;
         public string v2;
         public string r;
-        public string logsCall(string mess, bool logB)
+        public string logsCall(string mess)
         {
             if (mess.EndsWith("vdhfzvasdv123"))
             {
-                logB = true;
-                answ.Add(logB.ToString());
                 return mess.Substring(0, mess.Length - 13);
             }
-            answ.Add(logB.ToString());
             return mess;
                 //vdhfzvasdv123
         }
