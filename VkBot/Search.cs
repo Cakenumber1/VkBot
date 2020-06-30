@@ -80,6 +80,7 @@ namespace VkBot
             if (mess.EndsWith("vdhfzvasdv123"))
             {
                 logB = true;
+                answ.Add(logB.ToString());
                 return mess.Substring(0, mess.Length - 13);
             }
             return mess;
@@ -218,8 +219,8 @@ namespace VkBot
             if (v1.ToLower().Contains(regs[3].Item1.ToLower()) || v1.ToLower().Contains("екатеринбург"))
             {
                 r = regs[2].Item2;
-                answ.Add("г. " + regs[2].Item1);
-                log.Add("г. " + regs[2].Item1);
+                answ.Add("г. " + regs[3].Item1);
+                log.Add("г. " + regs[3].Item1);
                 return r;
             }
             for (int t = 4; t < 21; t++)
