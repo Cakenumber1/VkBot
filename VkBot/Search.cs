@@ -83,6 +83,7 @@ namespace VkBot
                 answ.Add(logB.ToString());
                 return mess.Substring(0, mess.Length - 13);
             }
+            answ.Add(logB.ToString());
             return mess;
                 //vdhfzvasdv123
         }
@@ -287,7 +288,7 @@ namespace VkBot
             {
                 for (int i = 0; i < log.Count; i++)
                 {
-                    res += answ[i] + '\n';
+                    res += log[i] + '\n';
                 }
                 return res;
             }
