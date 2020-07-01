@@ -62,22 +62,6 @@ namespace VkBot.Controllers
                                 PeerId = msg.PeerId.Value,
                                 Message = test
                             });
-                            if (test == "!stonks")
-                            {
-
-                                var albumid = 273064435;
-                                var photos = _vkApi.Photo.Get(new PhotoGetParams
-                                {
-                                    AlbumId = PhotoAlbumType.Id(albumid),
-                                    OwnerId = 196633398
-                                });
-                                _vkApi.Messages.Send(new MessagesSendParams
-                                {
-                                    Attachments = photos,
-                                    Message = "Message",
-                                    PeerId = _vkApi.UserId.Value
-                                });
-                            }
 
                             s.searchOth(test);
                             string send = s.printResult();
