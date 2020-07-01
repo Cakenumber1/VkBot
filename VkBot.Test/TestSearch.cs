@@ -7,7 +7,7 @@ using System.Runtime.InteropServices.ComTypes;
 namespace VkBot.Test
 {
     [TestClass]
-    public class UnitTest3
+    public class TestSearch
     {
         string[] test = { "!цб", "!город спб", "!цб GBP 22.22.2022" };
         string[] exp = { "Битва на Неретве" };
@@ -35,6 +35,14 @@ namespace VkBot.Test
         {
             s.searchOth(test[2]);
             string o3 = "Курс Фунт (GBP)"+ '\n' + "За 02.07.2020 от Цб"+ '\n' + "87,3965 руб. за 1 ед." +'\n' + "Проверьте корректость введенных данных 22.22.2022"+'\n';
+            Assert.AreEqual(s.printResult(), o3);
+
+        }
+        [TestMethod]
+        public void searchTest3()
+        {
+            s.searchOth("");
+            string o3 = "Запрос будет выполнен корректно, если в нем будет указана 1 валюта и 1 город." + '\n';
             Assert.AreEqual(s.printResult(), o3);
 
         }

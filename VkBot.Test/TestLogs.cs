@@ -7,10 +7,10 @@ using VkBot;
 namespace VkBot.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class TestLogs
     {
-        string[] test = { "Битва на Неретве vdhfzvasdv123", "vdhfzvasdv123 vdhfzvasdv123", "vdhfzvasdv123", " vdhfzvasdv123 " };
-        string[] exp = { "Битва на Неретве", "vdhfzvasdv123", "vdhfzvasdv123", " " };
+        string[] test = { "Битва на Неретве vdhfzvasdv123", "vdhfzvasdv123 vdhfzvasdv123", "vdhfzvasdv123", " vdhfzvasdv123 ", "" };
+        string[] exp = { "Битва на Неретве", "vdhfzvasdv123", "vdhfzvasdv123", " ", "" };
         Search s = new Search();
 
         [TestMethod]
@@ -38,6 +38,13 @@ namespace VkBot.Test
         {
 
             Assert.AreNotEqual(s.logsCall(test[3]), exp[3]);
+
+        }
+        [TestMethod]
+        public void logsTest4()
+        {
+
+            Assert.AreEqual(s.logsCall(test[4]), exp[4]);
 
         }
     }

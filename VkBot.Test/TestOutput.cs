@@ -7,7 +7,7 @@ using System.Runtime.InteropServices.ComTypes;
 namespace VkBot.Test
 {
     [TestClass]
-    public class UnitTest2
+    public class TestOutput
     {
         string[] test = { "Битва на Неретве", "asdasd vdhfzvasdv123"};
         string[] exp = { "Битва на Неретве", "asdasd" };
@@ -36,6 +36,13 @@ namespace VkBot.Test
             s.logsCall(test[1]);
 
             Assert.AreEqual(s.printResult(), "printResult func started"+'\n');
+
+        }
+        [TestMethod]
+        public void bothAddAndPrintTest3()
+        {
+
+            Assert.AreEqual(s.printResult(), "Чтобы получить справку по командам напишите \"!help\"");
 
         }
 
