@@ -75,17 +75,12 @@ namespace VkBot.Controllers
                         }
                         else
                         {
-                            
-                            MediaAttachment a = new Photo();
-                            a.Id = 457239019;
-                            a.OwnerId = 196633398;
-                            MediaAttachment[] pls = { a };
+
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
                                 RandomId = new DateTime().Millisecond,
                                 PeerId = msg.PeerId.Value,
                                 //Are you dumb, stupid, or dumb?
-                                Attachments = pls,
                                 Message = "Чтобы получить справку по командам напишите \"!help\""
                             });
                             break;
