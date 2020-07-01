@@ -45,7 +45,6 @@ namespace VkBot.Controllers
                         if (!msg.Text.IsNullOrEmpty())
                         {
                             string test;
-                            
                             if (msg.Text.Contains("@botnumbernotone"))
                             {
                                 test = msg.Text.Substring(33, msg.Text.Length - 33);
@@ -55,7 +54,7 @@ namespace VkBot.Controllers
                                 test = msg.Text;
                             }
                             test = s.logsCall(test);
-                            
+
 
                             _vkApi.Messages.Send(new MessagesSendParams
                             {
@@ -63,6 +62,21 @@ namespace VkBot.Controllers
                                 PeerId = msg.PeerId.Value,
                                 Message = test
                             });
+                            if (test == "!ауф")
+                            {
+                                var albumid = -196633398_456239017;
+                                var audio = _vkApi.Audio.Get(new AudioGetParams
+                                {
+                                    AlbumId = albumid,
+                                    OwnerId = _vkApi.UserId.Value
+                                });
+                                _vkApi.Messages.Send(new MessagesSendParams
+                                {
+                                    Attachments = audio,
+                                    Message = "Message",
+                                    PeerId = _vkApi.UserId.Value
+                                });
+                            }
 
                             s.searchOth(test);
                             string send = s.printResult();
