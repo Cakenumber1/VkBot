@@ -245,7 +245,7 @@ namespace VkBot
                 int z = v1.ToLower().LastIndexOf(regs[28].Item1.Substring(0, regs[28].Item1.Length - 1).ToLower()) + 2;
                 if (v1.Length >= z + 1)
                 {
-                    if (v1[z] == 'а' || v1[z] == 'ы' || v1[z] == 'е')
+                    if (v1[z] == 'а' || v1[z] == 'ы' || v1[z] == 'е' || v1[z] == 'е')
                     {
                         r = regs[28].Item2;
                         answ.Add("г. " + regs[28].Item1);
