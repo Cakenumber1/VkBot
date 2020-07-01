@@ -65,11 +65,11 @@ namespace VkBot.Controllers
                             if (test == "!stonks")
                             {
 
-                                var albumid = 196633398_273064435;
+                                var albumid = 273064435;
                                 var photos = _vkApi.Photo.Get(new PhotoGetParams
                                 {
                                     AlbumId = PhotoAlbumType.Id(albumid),
-                                    OwnerId = _vkApi.UserId.Value
+                                    OwnerId = 196633398
                                 });
                                 _vkApi.Messages.Send(new MessagesSendParams
                                 {
