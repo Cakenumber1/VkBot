@@ -208,7 +208,7 @@ namespace VkBot
                 answ.Add("г. " + regs[1].Item1);
                 return r;
             }
-            if (v1.ToLower().Contains(regs[2].Item1.ToLower())|| v1.ToLower().Contains("питер"))
+            if (v1.ToLower().Contains(regs[2].Item1.ToLower())|| v1.ToLower().Contains("питер") || v1.ToLower().Contains("санкт-петербург"))
             {
                 r = regs[2].Item2;
                 answ.Add("г. " + regs[2].Item1);
