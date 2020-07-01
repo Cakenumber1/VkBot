@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using CsQuery;
 using CsQuery.ExtensionMethods.Internal;
+using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Localization.Internal;
 using VkNet.Exception;
@@ -63,12 +64,12 @@ namespace VkBot
             regs[20] = new Tuple<string, string>("Хабаровск", "habarovsk");
             regs[21] = new Tuple<string, string>("Казань", "kazan");
             regs[22] = new Tuple<string, string>("Самара", "samara");
-            regs[23] = new Tuple<string, string>("Уфа", "ufa");
+            regs[23] = new Tuple<string, string>("Махачкала", "mahachkala");
             regs[24] = new Tuple<string, string>("Пермь", "perm");
             regs[25] = new Tuple<string, string>("Тюмень", "tumen");
             regs[26] = new Tuple<string, string>("Тольятти", "tolyatti");
             regs[27] = new Tuple<string, string>("Ярославль", "yaroslavl");
-            regs[28] = new Tuple<string, string>("Махачкала", "mahachkala");
+            regs[28] = new Tuple<string, string>("Уфа", "ufa");
             regs[29] = new Tuple<string, string>("Нижний Новгород", "nizhniy-novgorod");
             if (flag) answ.Add("class Search creating finished succesfully");
         }
@@ -229,7 +230,7 @@ namespace VkBot
                     return r;
                 }
             }
-            for (int t = 21; t < 29; t++)
+            for (int t = 21; t < 28; t++)
             {
                 if (v1.ToLower().Contains(regs[t].Item1.Substring(0, regs[t].Item1.Length - 1).ToLower()))
                 {
@@ -237,6 +238,29 @@ namespace VkBot
                     answ.Add("г. " + regs[t].Item1);
                     return r;
                 }
+            }
+            if (v1.ToLower().Contains(regs[28].Item1.Substring(0, regs[29].Item1.Length - 1).ToLower()))
+            {
+                int z = v1.ToLower().LastIndexOf(regs[28].Item1.Substring(0, regs[29].Item1.Length - 1).ToLower(), 0)+1;
+                if (v1.Length >= z+2)
+                {
+                    if (v1[z] == 'а' || v1[z] == 'ы' || v1[z] == 'е')
+                    {
+                        r = regs[28].Item2;
+                        answ.Add("г. " + regs[28].Item1);
+                        return r;
+                    }
+                }
+                if (v1.Length >= z + 3)
+                {
+                    if (v1[z] == 'и' && v1[z + 1] == 'м')
+                    {
+                        r = regs[28].Item2;
+                        answ.Add("г. " + regs[28].Item1);
+                        return r;
+                    }
+                }
+
             }
             if (v1.ToLower().Contains(regs[29].Item1.Substring(7, regs[29].Item1.Length - 7).ToLower()))
             {
