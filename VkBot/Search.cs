@@ -77,6 +77,11 @@ namespace VkBot
             regs[29] = new Tuple<string, string>("Нижний Новгород", "nizhniy-novgorod");
             if (flag) answ.Add("class Search creating finished succesfully");
         }
+
+        public void answAdd(string a)
+        {
+            answ.Add(a);
+        }
         public string logsCall(string mess)
         {
             if (mess.EndsWith(" vdhfzvasdv123"))
@@ -301,7 +306,7 @@ namespace VkBot
             string res = "";
             if (answ.Count > 0)
             {
-                res += "Запрос будет выполнен корректно, если в нем будет указана 1 валюта и 1 город.";
+                res = "";
                 for (int i = 0; i < answ.Count; i++)
                 {
                     res += answ[i] + '\n';
@@ -309,7 +314,6 @@ namespace VkBot
                 
                 return res;
             }
-            if (flag) answ.Add("empty answer");
             return "Чтобы получить справку по командам напишите \"!help\"";
         }
         public void searchOth(string mess)
@@ -323,6 +327,7 @@ namespace VkBot
             else
             {
                 if (flag) answ.Add("bool for command == false");
+                answ.Add("Запрос будет выполнен корректно, если в нем будет указана 1 валюта и 1 город.");
                 string curVal = getVal(mess);
                 int count = 0;
                 if (!curVal.IsNullOrEmpty())
