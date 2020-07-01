@@ -18,10 +18,14 @@ namespace VkBot
         
         Tuple<string, string, string>[] val = new Tuple<string, string, string>[5];
         Tuple<string, string>[] regs = new Tuple<string, string>[30];
-        public List<string> answ = new List<string>();
+        List<string> answ = new List<string>();
         //public List<string> log = new List<string>();
-        public string[] sorters = new string[8];
-        public bool flag = false;
+        string[] sorters = new string[8];
+        bool flag = false;
+        string sortn = "";
+        string v1;
+        string v2;
+        string r;
 
         public Search()
         {
@@ -41,16 +45,16 @@ namespace VkBot
             val[3] = new Tuple<string, string, string>("GBP", "Фунт", "8");
             val[4] = new Tuple<string, string, string>("USD", "Доллар", "1");
 
-            regs[0] = new Tuple<string, string>("Россия", "");
-            regs[1] = new Tuple<string, string>("Москва", "moskva");
-            regs[2] = new Tuple<string, string>("Спб", "sankt-peterburg");
-            regs[3] = new Tuple<string, string>("Екб", "ekaterinburg");
-            regs[4] = new Tuple<string, string>("Оренбург", "orenburg");
-            regs[5] = new Tuple<string, string>("Новосибирск", "novosibirsk");
-            regs[6] = new Tuple<string, string>("Томск", "tomsk");
-            regs[7] = new Tuple<string, string>("Омск", "omsk");
-            regs[8] = new Tuple<string, string>("Челябинск", "chelyabinsk");
-            regs[9] = new Tuple<string, string>("Ростов", "rostov-na-donu");
+            regs[0] =  new Tuple<string, string>("Россия", "");
+            regs[1] =  new Tuple<string, string>("Москва", "moskva");
+            regs[2] =  new Tuple<string, string>("Спб", "sankt-peterburg");
+            regs[3] =  new Tuple<string, string>("Екб", "ekaterinburg");
+            regs[4] =  new Tuple<string, string>("Оренбург", "orenburg");
+            regs[5] =  new Tuple<string, string>("Новосибирск", "novosibirsk");
+            regs[6] =  new Tuple<string, string>("Томск", "tomsk");
+            regs[7] =  new Tuple<string, string>("Омск", "omsk");
+            regs[8] =  new Tuple<string, string>("Челябинск", "chelyabinsk");
+            regs[9] =  new Tuple<string, string>("Ростов", "rostov-na-donu");
             regs[10] = new Tuple<string, string>("Красноярск", "krasnoyarsk");
             regs[11] = new Tuple<string, string>("Воронеж", "voronezh");
             regs[12] = new Tuple<string, string>("Волгоград", "volgograd");
@@ -69,15 +73,10 @@ namespace VkBot
             regs[25] = new Tuple<string, string>("Тюмень", "tumen");
             regs[26] = new Tuple<string, string>("Тольятти", "tolyatti");
             regs[27] = new Tuple<string, string>("Ярославль", "yaroslavl");
-
             regs[28] = new Tuple<string, string>("Уфа", "ufa");
             regs[29] = new Tuple<string, string>("Нижний Новгород", "nizhniy-novgorod");
             if (flag) answ.Add("class Search creating finished succesfully");
         }
-        public string sortn = "";
-        public string v1;
-        public string v2;
-        public string r;
         public string logsCall(string mess)
         {
             if (mess.EndsWith(" vdhfzvasdv123"))
@@ -88,7 +87,7 @@ namespace VkBot
             return mess;
                 // vdhfzvasdv123
         }
-        public bool command(string val1)
+        bool command(string val1)
         {
             if (flag) answ.Add("command func started with "+ val1);
             if (val1 == "!help")
@@ -156,7 +155,7 @@ namespace VkBot
             return false;
 
         }
-        public string getVal(string val1)
+        string getVal(string val1)
         {
             if (flag) answ.Add("getVal func started with "+val1);
             v1 = val1;
@@ -201,7 +200,7 @@ namespace VkBot
             if (flag) answ.Add("getVall nothing found");
             return v2;
         }
-        public string getReg()
+        string getReg()
         {
             if (flag) answ.Add("getReg func started");
             if (v1.ToLower().Contains(regs[1].Item1.Substring(0, regs[1].Item1.Length - 2).ToLower()))
@@ -272,7 +271,7 @@ namespace VkBot
             if (flag) answ.Add("City not found");
             return r;
         }
-        public int getSorttype()
+        int getSorttype()
         {
             if (flag) answ.Add("getSorttype func started");
             for (int t = 0; t < 8; t++)
@@ -302,10 +301,12 @@ namespace VkBot
             string res = "";
             if (answ.Count > 0)
             {
+                res += "Запрос будет выполнен корректно, если в нем будет указана 1 валюта и 1 город.";
                 for (int i = 0; i < answ.Count; i++)
                 {
                     res += answ[i] + '\n';
                 }
+                
                 return res;
             }
             if (flag) answ.Add("empty answer");
@@ -379,7 +380,7 @@ namespace VkBot
             }
         }
 
-        public void searchDate(string mess)
+        void searchDate(string mess)
         {
             if (flag) answ.Add("searchDate func started with string "+mess);
             string urlMain = "http://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=";
