@@ -69,6 +69,7 @@ namespace VkBot
             regs[25] = new Tuple<string, string>("Тюмень", "tumen");
             regs[26] = new Tuple<string, string>("Тольятти", "tolyatti");
             regs[27] = new Tuple<string, string>("Ярославль", "yaroslavl");
+
             regs[28] = new Tuple<string, string>("Уфа", "ufa");
             regs[29] = new Tuple<string, string>("Нижний Новгород", "nizhniy-novgorod");
             if (flag) answ.Add("class Search creating finished succesfully");
@@ -239,10 +240,10 @@ namespace VkBot
                     return r;
                 }
             }
-            if (v1.ToLower().Contains(regs[28].Item1.Substring(0, regs[29].Item1.Length - 1).ToLower()))
+            if (v1.ToLower().Contains(regs[28].Item1.Substring(0, regs[28].Item1.Length - 1).ToLower()))
             {
-                int z = v1.ToLower().LastIndexOf(regs[28].Item1.Substring(0, regs[29].Item1.Length - 1).ToLower(), 0)+1;
-                if (v1.Length >= z+2)
+                int z = v1.ToLower().LastIndexOf(regs[28].Item1.Substring(0, regs[28].Item1.Length - 1).ToLower()) + 2;
+                if (v1.Length >= z + 1)
                 {
                     if (v1[z] == 'а' || v1[z] == 'ы' || v1[z] == 'е')
                     {
@@ -251,7 +252,7 @@ namespace VkBot
                         return r;
                     }
                 }
-                if (v1.Length >= z + 3)
+                if (v1.Length >= z + 2)
                 {
                     if (v1[z] == 'и' && v1[z + 1] == 'м')
                     {
@@ -260,7 +261,6 @@ namespace VkBot
                         return r;
                     }
                 }
-
             }
             if (v1.ToLower().Contains(regs[29].Item1.Substring(7, regs[29].Item1.Length - 7).ToLower()))
             {
