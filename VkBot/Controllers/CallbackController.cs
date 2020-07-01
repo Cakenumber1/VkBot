@@ -64,12 +64,14 @@ namespace VkBot.Controllers
                             });
                             if (test == "!ауф")
                             {
-                                var albumid = -196633398_456239017;
+                                long[] id = {-196633398_456239017};
                                 var audio = _vkApi.Audio.Get(new AudioGetParams
                                 {
-                                    AlbumId = albumid,
-                                    OwnerId = _vkApi.UserId.Value
-                                });
+                                    //PlaylistId = -196633398,
+                                    OwnerId = _vkApi.UserId.Value,
+                                    AudioIds = id
+
+                                }); ;
                                 _vkApi.Messages.Send(new MessagesSendParams
                                 {
                                     Attachments = audio,
